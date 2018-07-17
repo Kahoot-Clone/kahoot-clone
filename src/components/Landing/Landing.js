@@ -25,7 +25,7 @@ export default class Landing extends Component {
                 </div>
 
                 <div>
-                    <Link to='/auth/login'>HOST</Link>
+                    <a href='http://localhost:3030/auth'>HOST</a>
                 </div> 
             </div>
         )
