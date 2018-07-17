@@ -12,12 +12,20 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "passport": "^0.4.0",
+    "passport-auth0": "^0.6.1",
+    "lodash": "^4.17.10",
+    "express-session": "^1.15.6",
+    "body-parser": "^1.18.3",
+    "chart.js": "^2.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy":"http://localhost:3030",
+  "main":"./server/index.js"
 }
