@@ -1,23 +1,28 @@
-class Quizes{
+class LiveQuizes{
     constructor(){
         this.quizes = [];
+
     }
-    addQuiz(hostId){
+
+    addQuiz(quizId,pin){
+
         let quiz = {
+            quizId: quizId,
+            title: '',
+            info: '',
             pin:()=>{return Math.floor(Math.random()*9000, 10000)},
             hostId: hostId,
             isLive: false,
             currentQuestion:0,
             questions: [],
-            players: []
+            players: new Players(pin)
         }
-        this.quizes.push()
-    }
-    getQuestions(){
 
+        this.quizes.push(quiz)
     }
+
+
     
-
 }
 
 module.export = {LiveQuiz}
