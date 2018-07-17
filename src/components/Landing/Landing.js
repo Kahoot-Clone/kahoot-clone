@@ -23,6 +23,10 @@ export default class Landing extends Component {
                     <button>ENTER</button>
                     </Link>
                 </div>
+
+                <div>
+                    <Link to='/auth/login'>HOST</Link>
+                </div> 
             </div>
         )
     }
