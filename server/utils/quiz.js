@@ -8,11 +8,11 @@ class Quiz{
         this.isLive = false
         this.currentQuestion = 0
         this.questions = []
-        this.players = new Players(pin)
+        this.players = []
         this.getQuiz(quizId)
     }
 
-    getQuiz = (req,res)=>{
+    getQuiz (req,res){
         req.app.get('db')
         .get_quizes(quizId)
         .then(()=>{
@@ -22,7 +22,7 @@ class Quiz{
         })
     }
 
-    getQuestions = (req,res)=>{
+    getQuestions(req,res){
         req.app.get('db')
         .get_questions(quizId).then(()=>{
             this.questions = res
@@ -33,4 +33,4 @@ class Quiz{
     
 }
 
-module.export = {Quiz}
+module.exports = {Quiz}

@@ -7,6 +7,7 @@ const express = require('express')
     ,bodyParser = require('body-parser')
     ,socket = require('socket.io')
     ,quizCtrl = require('./quizCtrl')
+    ,Quiz = require('./utils/quiz')
 
 const {
     SERVER_PORT,
@@ -26,9 +27,10 @@ const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',S
 io.on('connection', socket => {
    
     // Host Connection
-    socket.on('host-join', () => {
+    socket.on('host-join', (data) => {
         
-        console.log('host hit')
+        let currentQuiz = new Quiz(data.id);
+       console.log(currentQuiz)
             
     })
 })

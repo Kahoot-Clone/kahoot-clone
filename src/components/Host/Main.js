@@ -15,9 +15,8 @@ export default class  extends Component {
             this.setState({
                 quizzes: res.data
             })
-            this.socket = io('/');
-            this.socket.emit('host-join')
         })
+        this.socket = io('/');
     }
     render() {
         let {quizzes} = this.state;
@@ -26,11 +25,7 @@ export default class  extends Component {
                 <div key={quiz.id}>
                     <h1>{quiz.quiz_name}</h1>
                     <p>{quiz.info}</p>
-                    <button 
-                    // onClick={
-                    //     // socket host-join-game( quiz.pin)
-                    // }
-                    >Play</button>
+                    <button onClick={() => this.socket.emit('host-join', {id: quiz.id})}>Play</button>
                 </div> 
             )
         })
