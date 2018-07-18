@@ -3,7 +3,7 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action){
-    switch (key) {
+    switch () {
         // case value:
             
         //     break;
