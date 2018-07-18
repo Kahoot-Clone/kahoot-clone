@@ -7,6 +7,7 @@ const express = require('express')
     ,bodyParser = require('body-parser')
     ,socket = require('socket.io')
     ,quizCtrl = require('./quizCtrl')
+    ,{Quiz} = require('./utils/quiz')
 
 const {
     SERVER_PORT,
@@ -24,13 +25,21 @@ const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',S
 
 //When a connection to server is made from client
 io.on('connection', socket => {
-   
+    
+    let currentQuiz
     // Host Connection
-    socket.on('host-join', () => {
-        
-        console.log('host hit')
-            
+    socket.on('host-join', (data) => {
+
+        currentQuiz = new Quiz(data.quiz, app);
+        socket.emit('quiz-created');
+
     })
+            socket.on('host-routed', () => {
+                console.log('hit')
+                socket.emit('quiz-info', currentQuiz)
+            })
+
+
 })
 
 app.use(express.static(`${__dirname}/../build`))

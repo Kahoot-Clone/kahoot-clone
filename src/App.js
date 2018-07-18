@@ -12,11 +12,12 @@ class App extends Component {
       <div>
         <Switch>
           <Route path='/' exact component={Landing} />
-          <Route path='/game/:id' component={Game} />
+          <Route path='/game' component={Game} />
           <Route path='/host' exact component={Main} />
           <Route path='/host/newQuiz'  component={New_Quiz} />
           <Route path='/host/questions' component={Questions} />
           <Route path='/host/newquestion' component={New_Question} />
+          
         </Switch>
       </div>
     );
