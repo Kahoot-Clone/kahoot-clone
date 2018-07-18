@@ -5,7 +5,7 @@ const express = require('express')
     ,Auth0Stratagy = require('passport-auth0')
     ,massive = require('massive')
     ,bodyParser = require('body-parser')
-    ,sockets = require('socket.io')
+    ,socket = require('socket.io')
 
 const {
     SERVER_PORT,
@@ -19,6 +19,17 @@ const {
 } =  process.env;
 
 const app = express();
+const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',SERVER_PORT)}))
+
+//When a connection to server is made from client
+io.on('connection', socket => {
+    socket.emit('hello world')
+    // Host Connection
+    socket.on('host-join', data => {
+        const db = req.app.get('db')
+    })
+})
+
 app.use(express.static(`${__dirname}/../build`))
 app.use(bodyParser.json())
 
@@ -82,4 +93,3 @@ app.get('/auth/user', (req,res)=>{
         : res.status(401).send('Not signed in')
 })
 
-app.listen(SERVER_PORT, ()=>{console.log('Connected on port',SERVER_PORT)})
