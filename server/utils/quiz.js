@@ -9,15 +9,23 @@ class Quiz{
         this.currentQuestion = 0
         this.questions = []
         this.players = new Players(pin)
-        this.quizInfo(quizId)
+        this.getQuiz(quizId)
     }
 
-    quizInfo = (req,res)=>{req.app.get('db')
+    getQuiz = (req,res)=>{
+        req.app.get('db')
         .get_quizes(quizId)
-        .then(res=>{
+        .then(()=>{
             this.name = res.quiz_name;
             this.info = res.info;
             this.hostId = res.user_id
+        })
+    }
+
+    getQuestions = (req,res)=>{
+        req.app.get('db')
+        .get_questions(quizId).then(()=>{
+            this.questions = res
         })
     }
 
@@ -25,4 +33,4 @@ class Quiz{
     
 }
 
-module.export = {LiveQuiz}
+module.export = {Quiz}
