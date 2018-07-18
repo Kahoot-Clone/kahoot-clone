@@ -14,23 +14,13 @@ class Players{
         return this.players.push(player)
     }
 
-    totalScore(){
+    totalScore(playerId){
         return this.score.reduce((a,b)=>a+b);
     }
 
-    currentQuestionScore(){
+    currentQuestionScore(playerId){
+        this.players.indexOf({id:player})
         return this.score[this.score.length-1]
     }
-
-
-
-    addPlayerId(id){
-        this.id = id;
-    }
-
-    
-
-
-
     
 }
