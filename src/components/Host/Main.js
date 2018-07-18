@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import io from 'socket.io-client';
+import axios from 'axios';
  
 export default class  extends Component {
     constructor(){
@@ -9,7 +11,13 @@ export default class  extends Component {
         }
     }
     componentDidMount(){
-        // receive quizzes from socket somehow and then set state 
+        axios.get(`/api/getQuizzes/${1}`).then(res => {
+            this.setState({
+                quizzes: res.data
+            })
+            this.socket = io('/');
+            this.socket.emit('host-join')
+        })
     }
     render() {
         let {quizzes} = this.state;

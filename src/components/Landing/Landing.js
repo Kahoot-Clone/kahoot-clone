@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import io from 'socket.io-client';
 
 export default class Landing extends Component {
     constructor(){
@@ -9,6 +10,11 @@ export default class Landing extends Component {
         }
         this.handleInput = this.handleInput.bind(this);
     }
+    componentDidMount(){
+        this.socket = io('/');
+        
+    }
+
     handleInput(e){
         this.setState({
             pin: e.target.value

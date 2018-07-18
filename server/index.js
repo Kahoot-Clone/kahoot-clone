@@ -6,6 +6,7 @@ const express = require('express')
     ,massive = require('massive')
     ,bodyParser = require('body-parser')
     ,socket = require('socket.io')
+    ,quizCtrl = require('./quizCtrl')
 
 const {
     SERVER_PORT,
@@ -23,10 +24,12 @@ const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',S
 
 //When a connection to server is made from client
 io.on('connection', socket => {
-    socket.emit('hello world')
+   
     // Host Connection
-    socket.on('host-join', data => {
-        const db = req.app.get('db')
+    socket.on('host-join', () => {
+        
+        console.log('host hit')
+            
     })
 })
 
@@ -93,3 +96,7 @@ app.get('/auth/user', (req,res)=>{
         : res.status(401).send('Not signed in')
 })
 
+
+// DB calls for quizzes
+
+app.get('/api/getQuizzes/:id', quizCtrl.getQuizzes )
