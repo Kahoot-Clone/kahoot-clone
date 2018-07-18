@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
+import {connect} from 'react-redux';
 
-export default class Game extends Component {
+class Game extends Component {
     constructor(){
         super();
         this.state = {
@@ -11,10 +12,7 @@ export default class Game extends Component {
     }
     componentDidMount(){
         this.socket = io('/');
-        this.socket.emit('host-routed');
-        this.socket.on('quiz-info', (currentQuiz) => {
-            console.log(currentQuiz)
-        })
+        console.log(this.props.quiz);
     }
     render() {
         let {pin, players} = this.state;
@@ -33,3 +31,11 @@ export default class Game extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return{
+        quiz: state.quiz
+    }
+}
+
+export default connect(mapStateToProps)(Game)

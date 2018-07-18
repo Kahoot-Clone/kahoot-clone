@@ -3,8 +3,10 @@ import {Link} from 'react-router-dom';
 import io from 'socket.io-client';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {selectedQuiz} from '../../Ducks/Reducer';
  
-export default class Main extends Component {
+class Main extends Component {
     constructor(){
         super();
         this.state= {
@@ -19,14 +21,17 @@ export default class Main extends Component {
                 quizzes: res.data
             })
         })
-        this.socket = io('/');
-        this.socket.on('quiz-created', this.setRedirect)
+        // this.socket = io('/');
+        // this.socket.on('quiz-created', this.setRedirect)
     }
-    setRedirect(){
+    setRedirect(e){
+        this.props.selectedQuiz(e);
+
         this.setState({
             redirect: true
         })
     }
+
     render() {
         if (this.state.redirect){
            return <Redirect to='/game'/>
@@ -37,7 +42,7 @@ export default class Main extends Component {
                 <div key={quiz.id}>
                     <h1>{quiz.quiz_name}</h1>
                     <p>{quiz.info}</p>
-                    <button onClick={() => this.socket.emit('host-join', {quiz})}>Play</button>
+                    <button onClick={() => {this.setRedirect(quiz)}}>Play</button>
                 </div> 
             )
         })
@@ -53,3 +58,5 @@ export default class Main extends Component {
         )
     }
 }
+
+export default connect(null, {selectedQuiz})(Main);

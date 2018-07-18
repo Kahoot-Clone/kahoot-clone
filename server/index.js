@@ -31,13 +31,12 @@ io.on('connection', socket => {
     socket.on('host-join', (data) => {
 
         currentQuiz = new Quiz(data.quiz, app);
-        socket.emit('quiz-created');
+        socket.emit('quiz-info', currentQuiz)
 
     })
-            socket.on('host-routed', () => {
-                console.log('hit')
-                socket.emit('quiz-info', currentQuiz)
-            })
+            
+               
+            
 
 
 })
