@@ -25,7 +25,7 @@ export default class Landing extends Component {
             <div>
                 <div>
                     <input placeholder='Game PIN' onChange={this.handleInput} />
-                    <Link to={`/game/${this.state.pin}`}>
+                    <Link to={`/player/${this.state.pin}`}>
                     <button>ENTER</button>
                     </Link>
                 </div>
