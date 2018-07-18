@@ -26,6 +26,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy":"http://localhost:3030",
-  "main":"./server/index.js"
+  "proxy": "http://localhost:3030",
+  "main": "./server/index.js"
 }

@@ -22,7 +22,7 @@ export default class New_Question extends Component {
             //     this.setState({redirect: true})
             // })
 
-        }else{
+        } else {
             alert('All fields must be completed')
         }
     }
