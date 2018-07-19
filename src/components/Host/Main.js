@@ -16,7 +16,7 @@ class Main extends Component {
         this.setRedirect = this.setRedirect.bind(this);
     }
     componentDidMount(){
-        axios.get(`/api/getQuizzes/${1}`).then(res => {
+        axios.get(`/api/getQuizzes`).then(res => {
             this.setState({
                 quizzes: res.data
             })

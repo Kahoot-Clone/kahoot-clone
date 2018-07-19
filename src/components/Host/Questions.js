@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux'
 
-export default class Questions extends Component {
+class Questions extends Component {
     constructor() {
         super();
         this.state = {
@@ -10,8 +12,12 @@ export default class Questions extends Component {
         }
     }
     componentDidMount(){
-        //db call, get the quiz object, with thtis.props.id
-        //this.setState({quiz and questions})
+        axios.get(`/api/getQuizAndQs/${this.props.quizToEdit.id}`).then( res => {
+            this.setState({
+                questions: res.data.questions,
+                quiz: res.data.quiz
+            })
+        })
     }
 
     render() {
@@ -37,9 +43,18 @@ export default class Questions extends Component {
                 </div> 
                 {mappedQuestions}
                 <div>
-                    <button  >Add Question</button>
+                    <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
+                    <button >Add Question</button>
+                    </Link>
                 </div> 
             </div>
         )
     }
 }
+function mapStateToProps(state){
+    return {
+        quizToEdit: this.state
+    }
+}
+
+export default connect(mapStateToProps)(Questions)

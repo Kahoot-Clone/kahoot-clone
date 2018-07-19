@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import {Redirect} from 'react-router-dom';
 
 export default class New_Question extends Component {
@@ -17,10 +18,11 @@ export default class New_Question extends Component {
     }
     addQuestion(){
         let {question, answer1, answer2, answer3, answer4, correctAnswer} = this.state;
+        let {id} = this.props.match.params
         if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer){
-            // axios.post('/api/add_question', {question, answer1, answer2, answer3, answer4, correctAnswer}).then(res => {
-            //     this.setState({redirect: true})
-            // })
+            axios.post('/api/add_question', {question, answer1, answer2, answer3, answer4, correctAnswer, id}).then(res => {
+                this.setState({redirect: true})
+            })
 
         } else {
             alert('All fields must be completed')
