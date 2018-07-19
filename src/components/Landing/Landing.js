@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import {connect} from 'react-redux';
 import {handleNickname, selectedPin} from '../../Ducks/Reducer';
 
@@ -17,11 +17,6 @@ class Landing extends Component {
         this.handleNicknameInput = this.handleNicknameInput.bind(this);
         this.handleGo = this.handleGo.bind(this)
     }
-    componentDidMount(){
-        this.socket = io('/');
-        
-    }
-
     handleInput(e){
         this.setState({
             pin: e.target.value
@@ -29,10 +24,10 @@ class Landing extends Component {
 
     }
     handleToggle(){
+        this.props.selectedPin(this.state.pin)
         this.setState({
             toggle: true
         })
-        this.props.selectedPin(this.state.pin)
     }
     handleNicknameInput(e){
         this.setState({
@@ -43,6 +38,7 @@ class Landing extends Component {
         this.props.handleNickname(this.state.nickname)
     }
     render() {
+        console.log(this.state)
         return (
             <div>
                 {

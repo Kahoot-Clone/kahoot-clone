@@ -7,37 +7,38 @@ class Game extends Component {
         super();
         this.state = {
             pin: 0,
-            players: []
+            quiz:{
+                players:[]
+            }
         }
-        this.generatePin = this.generatePin.bind(this)
+        this.generatePin = this.generatePin.bind(this);
     }
     componentDidMount(){
         this.socket = io('/');
         this.generatePin();
-        this.socket.on('quiz-info', (quiz) => {
-            console.log(quiz)
-            this.setState({players: quiz.players})
+        this.socket.on('room-joined', (quiz) => {
+            this.setState({quiz: quiz})
         }  )
-        this.socket.on('room-joined', (data)=>{ console.log(`joined on ${data}`) } )
     }
     generatePin(){
         let newPin = Math.floor(Math.random()*9000, 10000)
         this.setState({pin: newPin})
         this.socket.emit('host-join', {quiz:this.props.quiz, pin:newPin});
     }
+  
     render() {
-        // console.log(this.state)
-        let {pin, players} = this.state;
-        let mappedPlayers = players.map(player => {
+        console.log(this.state.quiz)
+        let {pin} = this.state;
+        let mappedPlayers = this.state.quiz.players.map(player => {
             return(
-                <p>{player.name}</p>
+                <p key={player.id}>{player.name}</p>
             )
         })
         return (
             <div>
                 <h1>{pin}</h1>
                 <div>
-
+                    {mappedPlayers}
                 </div> 
             </div> 
         )

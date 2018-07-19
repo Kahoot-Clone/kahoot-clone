@@ -11,12 +11,16 @@ class Player extends Component {
     }
     componentDidMount(){
         this.socket= io('/');
-        this.socket.emit('player-joined', this.props.pin)
+        this.socket.emit('player-joined', this.props.selectedPin)
+        this.socket.emit('player-add', this.props)
+        this.socket.on('room-joined', (data)=>{console.log(data)})
     }
     render() {
+        console.log(this.props)
         return (
             <div>
-
+                <p>{this.props.selectedPin}</p>
+                <p>{this.props.nickname}</p>
             </div> 
         )
     }
@@ -24,7 +28,7 @@ class Player extends Component {
 
 function mapStateToProps(state){
     return{
-        pin: state.pin,
+        selectedPin: state.selectedPin,
         nickname: state.nickname
     }
 }

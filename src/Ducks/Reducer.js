@@ -12,13 +12,10 @@ export default function reducer(state = initialState, action){
     switch (action.type) {
         case SELECTED_QUIZ:
             return Object.assign({}, state, {quiz: action.payload})
-            break;
         case NEW_NICKNAME:
             return Object.assign({}, state, {nickname: action.payload})
-            break;
         case SELECTED_PIN:
             return Object.assign({}, state, {selectedPin: action.payload})
-            break;
     
         default:
             break;
