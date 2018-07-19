@@ -6,6 +6,7 @@ import New_Quiz from './components/Host/New_Quiz'
 import Game from './components/Game/Game'
 import Questions from './components/Host/Questions';
 import New_Question from './components/Host/New_Question';
+import Player from './components/Game/Player';
 class App extends Component {
   render() {
     return (
@@ -17,7 +18,7 @@ class App extends Component {
           <Route path='/host/newQuiz'  component={New_Quiz} />
           <Route path='/host/questions' component={Questions} />
           <Route path='/host/newquestion' component={New_Question} />
-          
+          <Route path='/player' component={Player} />
         </Switch>
       </div>
     );

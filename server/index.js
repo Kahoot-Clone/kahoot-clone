@@ -26,19 +26,17 @@ const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',S
 //When a connection to server is made from client
 io.on('connection', socket => {
     
-    let currentQuiz
     // Host Connection
     socket.on('host-join', (data) => {
-
-        currentQuiz = new Quiz(data.quiz, app);
+        socket.join(data.pin)
+        io.to(data.pin).emit('room-joined', data.pin)
+        let currentQuiz = new Quiz(data.quiz, app);
         socket.emit('quiz-info', currentQuiz)
-
     })
-            
-               
-            
-
-
+    //Player Join
+    socket.on('player-joined', (data) => {
+       socket.join(data) 
+    })
 })
 
 app.use(express.static(`${__dirname}/../build`))
