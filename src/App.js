@@ -17,7 +17,7 @@ class App extends Component {
           <Route path='/host' exact component={Main} />
           <Route path='/host/newQuiz'  component={New_Quiz} />
           <Route path='/host/questions' component={Questions} />
-          <Route path='/host/newquestion' component={New_Question} />
+          <Route path='/host/newquestion/:id' component={New_Question} />
           <Route path='/player' component={Player} />
         </Switch>
       </div>

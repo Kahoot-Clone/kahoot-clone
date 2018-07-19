@@ -1,12 +1,14 @@
 const initialState = {
     quiz: {},
     nickname: '',
-    selectedPin: 0
+    selectedPin: 0,
+    quizToEdit: {}
 }
 
 const SELECTED_QUIZ = 'SELECTED_QUIZ'
 const NEW_NICKNAME = 'NICKNAME'
 const SELECTED_PIN = 'SELECTED_PIN'
+const SELECTED_EDIT = 'SELECTED_EDIT'
 
 export default function reducer(state = initialState, action){
     switch (action.type) {
@@ -19,6 +21,8 @@ export default function reducer(state = initialState, action){
         case SELECTED_PIN:
             return Object.assign({}, state, {selectedPin: action.payload})
             break;
+        case SELECTED_EDIT: 
+            return Object.assign({}, state, {quizToEdit: action.payload})
     
         default:
             break;
@@ -42,5 +46,11 @@ export function selectedPin(pin){
     return{
         type: SELECTED_PIN,
         payload: pin
+    }
+}
+export function editingQuiz(quiz){
+    return {
+        type: SELECTED_EDIT,
+        payload: quiz
     }
 }
