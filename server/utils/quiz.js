@@ -9,17 +9,18 @@ class Quiz{
         this.currentQuestion = 0;
         this.questions = [];
 
-        // SAMPLE PLAYERS ARR [{id: 0, name: 'will', score: [1,4,60], qAnswered: false }, 
+        // SAMPLE PLAYERS ARR [{id: 0, name: 'will', score: [1,4,60], qAnswered: false}, 
         //                     {id: 1, name: 'bill', score: [1,3,40], qAnswered: true}]
         this.players = [];
         this.playerCounter = 0;
 
         this.getQuestions(app);
       }
-
+/////Will reset eveything and start the counter
     nextQuestion(){
         this.timer = 30;
         ++this.currentQuestion;
+        this.players.forEach(player=>{player.qAnswered = false})
         timeCheck = timeCheck.bind(this)
 
         let timeKeeper = setInterval(()=>{timeCheck()}, 1000);
@@ -38,10 +39,6 @@ class Quiz{
         }
     }
 
-    submitQuestion(playerId, answer){
-        this.questions
-    }
-    
     addPlayer(name){
         let player = {
             id: this.playerCounter,
@@ -50,10 +47,12 @@ class Quiz{
             qAnswered: false
         }
         this.players.push(player)
-      return this.playerCounter++
+        return this.playerCounter++
     }
-    submitAnswer(playerId){
-        this.players[playerId]
+    submitAnswer(playerId, answer){
+        this.questions.correctanswer[this.currentQuestion-1] === answer
+            ? this.players[playerId].qAnswered = true
+            : null
     }
     totalScore(playerId){
         return this.players[playerId].reduce((a,b)=>a+b);
