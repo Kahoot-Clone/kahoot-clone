@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import io from 'socket.io-client';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {selectedQuiz} from '../../Ducks/Reducer';
+import {selectedQuiz, editingQuiz} from '../../Ducks/Reducer';
  
 class Main extends Component {
     constructor(){
@@ -16,19 +15,30 @@ class Main extends Component {
         this.setRedirect = this.setRedirect.bind(this);
     }
     componentDidMount(){
+        this.getQuizzes()
+        
+    }
+    getQuizzes(){
         axios.get(`/api/getQuizzes`).then(res => {
             this.setState({
                 quizzes: res.data
             })
         })
-        // this.socket = io('/');
-        // this.socket.on('quiz-created', this.setRedirect)
     }
     setRedirect(e){
         this.props.selectedQuiz(e);
 
         this.setState({
             redirect: true
+        })
+    }
+    deleteQuiz(id){
+        axios.delete(`/api/deletequiz/${id}`).then(res => {
+            if (res.status === 200){
+                this.getQuizzes();
+            } else{
+                alert('Something went wrong :(')
+            }
         })
     }
 
@@ -42,7 +52,11 @@ class Main extends Component {
                 <div key={quiz.id}>
                     <h1>{quiz.quiz_name}</h1>
                     <p>{quiz.info}</p>
-                    <button onClick={() => {this.setRedirect(quiz)}}>Play</button>
+                    <button onClick={() => this.setRedirect(quiz)}>Play</button>
+                    <button onClick={() =>  this.deleteQuiz(quiz.id)}>Delete</button>
+                    <Link to='/host/questions'>
+                    <button onClick={()=> this.props.editingQuiz(quiz)}>Edit</button>
+                    </Link>
                 </div> 
             )
         })
@@ -59,4 +73,4 @@ class Main extends Component {
     }
 }
 
-export default connect(null, {selectedQuiz})(Main);
+export default connect(null, {selectedQuiz, editingQuiz})(Main);

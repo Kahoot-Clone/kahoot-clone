@@ -111,6 +111,26 @@ app.get('/auth/user', (req,res)=>{
 })
 
 
-// DB calls for quizzes
+/////////////////// DB calls for quizzes
 
-app.get('/api/getQuizzes/:id', quizCtrl.getQuizzes )
+//Get
+
+app.get('/api/getQuizzes', quizCtrl.getQuizzes )
+app.get('/api/getquestions/:id', quizCtrl.getQuestions)
+app.get('/api/getquestion/:id', quizCtrl.getQuestion)
+app.get('/api/getquiz/:id', quizCtrl.getQuiz)
+
+//Put
+
+app.put('/api/updatequestion', quizCtrl.updateQuestion)
+app.put('/api/updatequiz', quizCtrl.updateQuiz)
+
+//Post
+
+app.post('/api/newquestion', quizCtrl.addQuestion)
+app.post('/api/newquiz', quizCtrl.newQuiz ) 
+
+//Delete
+
+app.delete('/api/deletequiz/:id', quizCtrl.deleteQuiz)
+app.delete('/api/deletequestion/:id', quizCtrl.deleteQuestion)
