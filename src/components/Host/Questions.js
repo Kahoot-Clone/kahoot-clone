@@ -11,7 +11,8 @@ class Questions extends Component {
             questions: [],
             quiz: {},
             newName: '',
-            newInfo: ''
+            newInfo: '',
+            toggle: false
         }
     }
     componentDidMount() {
@@ -32,6 +33,12 @@ class Questions extends Component {
     deleteQuestion(id) {
         axios.delete(`/api/deletequestion/${id}`).then(res => {
             this.getQuestions()
+        })
+    }
+
+    displayEdit(){
+        this.setState({
+            toggle: true
         })
     }
 
@@ -81,17 +88,34 @@ class Questions extends Component {
 
         return (
             <div>
+                { 
+                    !this.state.toggle 
+                        ?
+                        <div>
                 <Link to='/host'>
                     <button >Done</button>
                 </Link>
-                <div>
-                    <h1>{this.state.quiz.quiz_name}</h1>
-                    <input placeholder='New name' onChange={(e) => this.setState({ newName: e.target.value })} />
-                    <p>{this.state.quiz.info}</p>
-                    <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
-                    <button onClick={() => this.updateQuiz()}>update</button>
-                    <hr />
-                </div>
+                    <div>
+                        <h1>{this.state.quiz.quiz_name}</h1>
+                        <p>{this.state.quiz.info}</p>
+                        <button onClick={() => this.displayEdit()}>Update</button>
+                    </div>
+                    </div>
+                        :
+                        <div>
+                <Link to='/host'>
+                    <button >Done</button>
+                </Link>
+                        <h1>{this.state.quiz.quiz_name}</h1>
+                        <p>{this.state.quiz.info}</p>
+                        <input placeholder='New name' onChange={(e) => this.setState({ newName: e.target.value })} />
+                        <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
+                    
+                        <button onClick={() => this.updateQuiz()}>Save</button>
+                    
+                        <hr />
+                    </div>
+                }
                 {mappedQuestions}
                 <div>
                     <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
