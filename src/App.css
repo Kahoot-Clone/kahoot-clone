@@ -4,7 +4,10 @@
   justify-content: center;
   min-height: 100vh;
   background-color: rgb(18, 134, 134);
-
+  animation-name: color;
+  animation-duration: 10s;
+  animation-iteration-count: infinite; 
+  animation-timing-function: linear; 
 }
 
 
@@ -12,5 +15,22 @@
  .component-container{
    justify-content: center;
  }
+}
 
+@keyframes color{
+  0%{
+    background-color: #00d0ff;
+  }
+  25%{
+    background-color: #e70dbf;
+  }
+  50%{
+    background-color: #ec780b;
+  }
+  75%{
+    background-color: #30d62d;
+  }
+  100%{
+    background-color: #00d0ff;
+  }
 }
