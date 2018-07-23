@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import PlayerQuestions from './Player_Questions';
-import PlayerQuestionOver from './Player_Question_Over'
+import PlayerQuestionOver from './Player_Question_Over';
+import './Game.css';
 
 class Player extends Component {
     constructor() {
@@ -49,12 +50,14 @@ class Player extends Component {
         console.log(this.props)
         let { gameStarted, questionOver, answerSubmitted } = this.state;
         return (
-            <div>
-                <p>{this.props.selectedPin}</p>
+            <div className='player-container' >
+                <div className='status-bar'>
+                    <p className='player-info' >PIN: {this.props.selectedPin}</p>
+                </div> 
                 {
                     !gameStarted && !questionOver
-                        ?
-                        <div>
+                    ?
+                    <div>
                             <p>You're in!
                              <br />
                                 Do you see your nickname on the screen?
@@ -72,7 +75,11 @@ class Player extends Component {
                         </div> 
                         :
                         <PlayerQuestionOver />
-                }
+                    }
+                    <div className='status-bar' >
+                    <p className='player-info'>{this.props.nickname}</p>
+                    <div className='status-bar-score' >0</div> 
+                    </div> 
             </div>
         )
     }
