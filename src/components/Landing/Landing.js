@@ -56,7 +56,7 @@ class Landing extends Component {
                         :
                         <div className='landing-wrapper' >
                           <div className='logo-container' >
-                            <img src={Kwizz} alt='Kwizz logo' />
+                            <img src={Kwizz} alt='Kwizz logo' className='logo'/>
                           </div> 
                             <div>
                                 <input type='text' value={this.state.nickname} placeholder='Nickname' onChange={this.handleNicknameInput} className='input-user' />
