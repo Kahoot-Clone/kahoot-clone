@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleNickname, selectedPin } from '../../Ducks/Reducer';
+import './Landing.css';
+import Kwizz from '../../Assests/Kwizz.svg'
 
 class Landing extends Component {
     constructor() {
@@ -38,25 +40,35 @@ class Landing extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='component-container' >
                 {
                     !this.state.toggle
                         ?
-                        <div>
-                            <input type='number' value={this.state.pin} placeholder='Game PIN' onChange={this.handleInput} />
-                            <button onClick={this.handleToggle} >next</button>
+                        <div className='landing-wrapper' >
+                            <div className='logo-container' >
+                            <img src={Kwizz} alt='Kwizz logo' className='logo'/>
+                            </div> 
+                            <div>
+                                <input type='number' value={this.state.pin} placeholder='Game PIN' onChange={this.handleInput} className='input-user'/>
+                                <button onClick={this.handleToggle} className='btn-enter' >Enter</button>
+                            </div> 
                         </div>
                         :
-                        <div>
-                            <input type='text' value={this.state.nickname} placeholder='Nickname' onChange={this.handleNicknameInput} />
-                            <Link to='/player'>
-                                <button onClick={this.handleGo}>OK,go!</button>
-                            </Link>
+                        <div className='landing-wrapper' >
+                          <div className='logo-container' >
+                            <img src={Kwizz} alt='Kwizz logo' />
+                          </div> 
+                            <div>
+                                <input type='text' value={this.state.nickname} placeholder='Nickname' onChange={this.handleNicknameInput} className='input-user' />
+                                <Link to='/player'>
+                                    <button onClick={this.handleGo} className='btn-enter' >OK,go!</button>
+                                </Link>
+                            </div> 
 
                         </div>
                 }
-                <div>
-                    <a href='http://localhost:3030/auth'>HOST</a>
+                <div className='btn-host' >
+                    <a id='atag' href='http://localhost:3030/auth'>HOST</a>
                 </div>
             </div>
         )
