@@ -29,13 +29,14 @@ io.on('connection', socket => {
     // Host Connection
     socket.on('host-join', (data) => {
         socket.join(data.pin)
-        // io.to(data.pin).emit('room-joined', data.pin)
+        
         let currentQuiz = new Quiz(data.quiz, app);
         socket.adapter.rooms[data.pin]['quiz'] = currentQuiz;
         socket.emit('room-joined', currentQuiz)
     })
     //Player Join Room
     socket.on('player-joined', (data) => {
+        console.log(data)
        socket.join(data) 
     })
     //Add player to Quiz Object
@@ -43,6 +44,17 @@ io.on('connection', socket => {
         socket.adapter.rooms[data.selectedPin].quiz.addPlayer(data.nickname);
         socket.to(`${data.selectedPin}`).emit('room-joined', socket.adapter.rooms[data.selectedPin]['quiz']);
         console.log(socket.adapter.rooms);
+    })
+
+    socket.on('game-started', (data) => {
+        
+        socket.to(`${data.pin}`).emit('game-started')
+    })
+    socket.on('question-over', (data) => {
+        socket.to(`${data.pin}`).emit('question-over')
+    })
+    socket.on('next-question', (data) => {
+        socket.to(`${data.pin}`).emit('next-question')
     })
 
 })
