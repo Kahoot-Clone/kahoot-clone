@@ -3,7 +3,6 @@ class Quiz{
         this.quizId = quiz.id;
         this.name = quiz.quiz_name;
         this.info = quiz.info;
-
         this.timer = 30;
         this.isLive = false;
         this.currentQuestion = 0;
@@ -39,7 +38,7 @@ class Quiz{
         }
     }
 
-    addPlayer(name){
+    addPlayer (name){
         let player = {
             id: this.playerCounter,
             name: name,

@@ -1,33 +1,85 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import io from 'socket.io-client';
+import PlayerQuestions from './Player_Questions';
+import PlayerQuestionOver from './Player_Question_Over'
 
 class Player extends Component {
-    constructor(){
+    constructor() {
         super()
-        this.state={
-            pinCorrect: false
+        this.state = {
+            pinCorrect: false,
+            gameStarted: false,
+            questionOver: false,
+            answerSubmitted: false
         }
+        this.submitAnswer = this.submitAnswer.bind(this);
     }
-    componentDidMount(){
-        this.socket= io('/');
+    componentDidMount() {
+        this.socket = io('/');
         this.socket.emit('player-joined', this.props.selectedPin)
         this.socket.emit('player-add', this.props)
-        this.socket.on('room-joined', (data)=>{console.log(data)})
+        this.socket.on('room-joined', (data) => { console.log('Quiz data: ' + data) })
+        this.socket.on('game-started', data => {
+            this.setState({
+                gameStarted: true
+            })
+        })
+        this.socket.on('question-over', () => {
+            this.setState({
+                questionOver: true
+            })
+        })
+        this.socket.on('next-question', () => {
+            console.log('hit')
+            this.setState({
+                questionOver: false,
+                answerSubmitted: false
+            })
+        })
+    }
+    submitAnswer(num){ 
+        // IDK where we want to grab the playerID from to pass here
+        // Emit to trigger submitAnswer in the quiz constructor on Game.js
+        this.setState({
+            answerSubmitted: true
+        })
     }
     render() {
         console.log(this.props)
+        let { gameStarted, questionOver, answerSubmitted } = this.state;
         return (
             <div>
                 <p>{this.props.selectedPin}</p>
-                <p>{this.props.nickname}</p>
-            </div> 
+                {
+                    !gameStarted && !questionOver
+                        ?
+                        <div>
+                            <p>You're in!
+                             <br />
+                                Do you see your nickname on the screen?
+                            </p>
+                        </div>
+                        :
+                        gameStarted && !questionOver && !answerSubmitted
+                        ?
+                        <PlayerQuestions submitAnswer ={this.submitAnswer} />
+                        :
+                        gameStarted && !questionOver && answerSubmitted
+                        ?
+                        <div>
+                            Did You answer too fast????
+                        </div> 
+                        :
+                        <PlayerQuestionOver />
+                }
+            </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         selectedPin: state.selectedPin,
         nickname: state.nickname
     }
