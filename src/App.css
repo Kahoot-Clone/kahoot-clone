@@ -1,28 +1,39 @@
-.App {
+.background{
+  background-color: rgb(48, 219, 219);
+  height: 100vh;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows:  2fr 1fr 4fr;
+  grid-gap: 1em;
+}
+
+.grid1{
+}
+
+.btn-enter{
+    display: block;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    border-radius: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    background-color: #333;
+    background-image: linear-gradient(to bottom,#333,#333);
+    background-repeat: repeat-x;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+    background-position: 0;
+    min-width: 100px;
+    height: 50px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.input-username{
+  height: 50px;
+  line-height: 50px;
+  color: #333;
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  font-size: 20px;
 }
