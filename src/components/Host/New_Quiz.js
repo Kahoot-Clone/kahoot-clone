@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {Redirect}from "react-router-dom"
 import {connect} from 'react-redux'
-import {editingQuiz} from '../../Ducks/Reducer'
+import {editingQuiz} from '../../Ducks/Reducer';
 
 class New_Quiz extends Component {
     constructor(){
@@ -40,15 +40,16 @@ class New_Quiz extends Component {
             return <Redirect to='/host/questions'/>
         }
         return (
-            <div>
-                <label>Title</label>
-                <input onChange={this.handleInput} />
-                <label>Description</label>
-                <textarea onChange={this.handleTextarea}></textarea>
-                
-                <button onClick={this.createQuiz}>Ok, Go</button>
-               
-
+            <div className='mapped-container' >
+                <div className='new-kwizz-form' >
+                    <label className='kwizz-desc kwizz-info' >New Kwizz Title</label>
+                    <input className='title-input' onChange={this.handleInput} type='text'/>
+                    <label className='kwizz-desc kwizz-info'>Description</label>
+                    <textarea className='desc-input' onChange={this.handleTextarea}></textarea>
+                    <div className='kwizz-info ok-go-div' >
+                        <button onClick={this.createQuiz} className='btn-play  ok-go' >Ok, Go</button>
+                    </div> 
+                </div> 
             </div> 
         )
     }

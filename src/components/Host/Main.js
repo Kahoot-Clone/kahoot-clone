@@ -65,8 +65,8 @@ class Main extends Component {
             )
         })
         return (
-            <div className='mapped-contianer' >
-                <div  >
+            <div className='mapped-container' >
+                <div className='host-logo-container'>
                     <img src={Kwizz} alt='kwizz logo' className='logo'/>
                 </div> 
                 <div className='mapped-Kwizzes-container' >

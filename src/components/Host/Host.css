@@ -50,9 +50,9 @@ text-align: center;
     color: rgb(252, 252, 252)
 }
 .kwizz-desc{
-    font-size: 16px;
-    font-weight: 400;
-    color: rgb(191, 224, 255) 
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(255, 255, 255) 
 }
 
 .btn-new{
@@ -77,13 +77,35 @@ text-align: center;
     padding-bottom: 12px;
 }
 
+.btn-new:hover{
+    animation: btn-new-hover 250ms;
+}
+
+@keyframes btn-new-hover{
+
+    25%{
+        transform: rotate(-15deg)
+    }
+    75%{
+        transform: rotate(15deg)
+    }
+}
+
 .newKwizz{
     width: 100vw;
     display: flex;
     justify-content: center;
 }
 
-.mapped-contianer{
+.ok-go-div{
+    padding-top: 20px;
+}
+
+.ok-go{
+    margin: 0 auto;
+}
+
+.mapped-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -94,14 +116,69 @@ text-align: center;
 }
 
 .mapped-Kwizzes-container{
-width: 100vw;
+width: 900px;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
+}
+
+.host-logo-container{
+    width: 100vw;
+    text-align: center;
 }
 
 .logo{
     width: 300px;
     margin-top: 100px;
 }
+
+.new-kwizz-form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 400px;
+    width: 800px;
+    margin-top: 100px;
+    padding: 60px;
+    box-sizing: border-box;
+    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.137);
+    background-image: linear-gradient(to bottom,#506fc2,#4d65aaa6);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+*:focus{
+    outline: none;
+}
+
+.title-input{
+    width: 300px;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom,#ffffff18,#ffffff05);
+    border: none;
+    border-radius: 4px;
+    border-bottom: 1px solid #333;
+    color: rgb(255, 255, 255);
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.desc-input{
+    width: 300px;
+    border: none;
+    border-radius: 4px;
+    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.137);
+    background: linear-gradient(to bottom,#ffffff18,#ffffff05);
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    font-weight: 200;
+}
+
+
+
+
 
