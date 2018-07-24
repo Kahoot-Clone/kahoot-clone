@@ -9,6 +9,7 @@ import New_Question from './components/Host/New_Question';
 import Player from './components/Game/Player';
 import Edit_Question from './components/Host/Edit_Question';
 import './App.css';
+import './reset.css';
 
 
 class App extends Component {
