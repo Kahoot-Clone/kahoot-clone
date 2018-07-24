@@ -56,6 +56,9 @@ io.on('connection', socket => {
     socket.on('next-question', (data) => {
         socket.to(`${data.pin}`).emit('next-question')
     })
+    socket.on('question-answered', (data) => {
+        socket.adapter.rooms[data.selectedPin].quiz.submitAnswer(data.playerId, data.answer)
+    })
 
 })
 
