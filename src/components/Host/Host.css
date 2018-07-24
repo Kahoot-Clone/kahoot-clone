@@ -1,0 +1,107 @@
+.kwizz-container{
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+height: 200px;
+width: 600px;
+background-color: rgba(255, 255, 255, 0.281);
+border-radius: 4px;
+padding: 24px;
+box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
+}
+
+.btn-play{
+    display: block;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    border-radius: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    background-color: #333;
+    background-image: linear-gradient(to bottom,#333,#333);
+    background-repeat: repeat-x;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+    background-position: 0;
+    width: 100px;
+    height:45px;
+    font-weight: 600;
+    font-size: 20px;
+    transition: 250ms
+}
+
+.btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 8px;
+}
+
+.btn-play:hover{
+    background-image: linear-gradient(to bottom,rgb(75, 75, 75),rgb(59, 59, 59));
+    transform: scale(1.09)
+}
+
+.kwizz-info{
+width: 100%;
+text-align: center;
+}
+
+.kwizz-title{
+    font-size: 30px;
+    color: rgb(252, 252, 252)
+}
+.kwizz-desc{
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(191, 224, 255) 
+}
+
+.btn-new{
+    display: block;
+    text-align: center;
+    padding-top: 12px;
+    border-radius: 2px;
+    background-color: rgb(51, 51, 51);
+    background-image: linear-gradient(to bottom,#8502d1,#7104b1);
+    background-repeat: repeat-x;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+    background-position: 0;
+    width: 250px;
+    height: 50px;
+    box-sizing: border-box;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+
+.newKwizz{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.mapped-contianer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(9, 130, 201);
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    font-weight: 700; 
+}
+
+.mapped-Kwizzes-container{
+width: 100vw;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.logo{
+    width: 300px;
+    margin-top: 100px;
+}
+

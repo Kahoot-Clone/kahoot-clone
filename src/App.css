@@ -11,6 +11,12 @@
 }
 
 
+a{
+  text-decoration: none;
+}
+
+
+
 @media(min-width:700px){
  .component-container{
    justify-content: center;
