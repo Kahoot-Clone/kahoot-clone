@@ -38,7 +38,7 @@ class Questions extends Component {
 
     displayEdit(){
         this.setState({
-            toggle: true
+            toggle: !this.state.toggle
         })
     }
 
@@ -112,6 +112,7 @@ class Questions extends Component {
                         <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
                     
                         <button onClick={() => this.updateQuiz()}>Save</button>
+                        <button onClick={() => this.displayEdit()}>Cancel</button>
                     
                         <hr />
                     </div>
