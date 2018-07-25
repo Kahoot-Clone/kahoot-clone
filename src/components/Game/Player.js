@@ -21,11 +21,6 @@ class Player extends Component {
         this.socket.emit('player-joined', this.props.selectedPin)
         this.socket.emit('player-add', this.props)
         this.socket.on('room-joined', (data) => { console.log('Quiz data: ' + data) })
-        this.socket.on('game-started', data => {
-            this.setState({
-                gameStarted: true
-            })
-        })
         this.socket.on('question-over', () => {
             this.setState({
                 questionOver: true
@@ -34,14 +29,14 @@ class Player extends Component {
         this.socket.on('next-question', () => {
             console.log('hit')
             this.setState({
+                gameStarted: true,
                 questionOver: false,
                 answerSubmitted: false
             })
         })
     }
     submitAnswer(num){ 
-        // IDK where we want to grab the playerID from to pass here
-        // Emit to trigger submitAnswer in the quiz constructor on Game.js
+        this.socket.emit('question-answered', {name: this.props.nickname, answer: num, pin: this.props.selectedPin})
         this.setState({
             answerSubmitted: true
         })
