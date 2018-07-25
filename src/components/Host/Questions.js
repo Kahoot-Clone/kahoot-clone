@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { editingQuiz } from '../../Ducks/Reducer'
+import { editingQuiz } from '../../Ducks/Reducer';
+import './Host-Question.css'
 
 class Questions extends Component {
     constructor() {
@@ -77,9 +78,9 @@ class Questions extends Component {
 
                         </ul>
                         <Link to={`/host/editquestion/${question.id}`}>
-                            <button>Edit</button>
+                            <button className='btn-play' >Edit</button>
                         </Link>
-                        <button onClick={() => this.deleteQuestion(question.id)}>Delete</button>
+                        <button onClick={() => this.deleteQuestion(question.id)} className='btn-play'>Delete</button>
                     </div>
                 )
             })
@@ -87,32 +88,34 @@ class Questions extends Component {
         }
 
         return (
-            <div>
+            <div className= 'mapped-container' >
                 { 
                     !this.state.toggle 
                         ?
-                        <div>
-                <Link to='/host'>
-                    <button >Done</button>
-                </Link>
                     <div>
-                        <h1>{this.state.quiz.quiz_name}</h1>
+                        <div className='btn-done-div'>
+                            <Link to='/host'>
+                                <button className='btn-play btn-done' >Done</button>
+                            </Link>
+                        </div>
+                    <div>
+                        <h1 className='kwizz-info kwizz-title'>{this.state.quiz.quiz_name}</h1>
                         <p>{this.state.quiz.info}</p>
-                        <button onClick={() => this.displayEdit()}>Update</button>
+                        <button onClick={() => this.displayEdit()} className='btn-play' >Update</button>
                     </div>
                     </div>
                         :
                         <div>
                 <Link to='/host'>
-                    <button >Done</button>
+                    <button className='btn-play' >Done</button>
                 </Link>
                         <h1>{this.state.quiz.quiz_name}</h1>
                         <p>{this.state.quiz.info}</p>
                         <input placeholder='New name' onChange={(e) => this.setState({ newName: e.target.value })} />
                         <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
                     
-                        <button onClick={() => this.updateQuiz()}>Save</button>
-                        <button onClick={() => this.displayEdit()}>Cancel</button>
+                        <button onClick={() => this.updateQuiz()} className='btn-play'>Save</button>
+                        <button onClick={() => this.displayEdit()} className='btn-play' >Cancel</button>
                     
                         <hr />
                     </div>
@@ -120,7 +123,7 @@ class Questions extends Component {
                 {mappedQuestions}
                 <div>
                     <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
-                        <button >Add Question</button>
+                        <button className='btn-play'>Add Question</button>
                     </Link>
                 </div>
             </div>

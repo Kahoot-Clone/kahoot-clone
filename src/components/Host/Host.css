@@ -1,13 +1,14 @@
 .kwizz-container{
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-height: 200px;
-width: 600px;
-background-color: rgba(255, 255, 255, 0.281);
-border-radius: 4px;
-padding: 24px;
-box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 200px;
+    width: 600px;
+    background-color: rgba(255, 255, 255, 0.281);
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
+    margin-bottom: 20px;
 }
 
 .btn-play{
@@ -75,6 +76,7 @@ text-align: center;
     font-weight: 600;
     font-size: 20px;
     padding-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .btn-new:hover{
@@ -116,10 +118,10 @@ text-align: center;
 }
 
 .mapped-Kwizzes-container{
-width: 900px;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+    width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .host-logo-container{
@@ -177,6 +179,7 @@ justify-content: center;
     text-align: center;
     font-weight: 200;
 }
+
 
 
 
