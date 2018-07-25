@@ -46,6 +46,9 @@ class Questions extends Component {
 
     updateQuiz() {
         let { newName, newInfo, quiz } = this.state;
+        this.setState({
+            toggle: !this.state.toggle
+        })
         if (newName && newInfo) {
             axios.put('/api/updatequiz', { newName, newInfo, id: quiz.id }).then(res => {
                 this.handleUpdatedQuiz(quiz.id)
@@ -68,7 +71,7 @@ class Questions extends Component {
         if (questions) {
             var mappedQuestions = questions.map((question) => {
                 return (
-                    <div key={question.id} >
+                    <div key={question.id} className=''>
                         <h1>{question.question}</h1>
                         <ul>
                             <li>1:{question.answer1}</li>
@@ -99,11 +102,13 @@ class Questions extends Component {
                                 <button className='btn-play btn-done' >Done</button>
                             </Link>
                         </div>
-                    <div className='kwizz-container'>
-                        <h1>{this.state.quiz.quiz_name}</h1>
+                    <div className='kwizz-container-edit'>
+                        <h1 className='kwizz-title'>{this.state.quiz.quiz_name}</h1>
                         <br />
-                        <p>{this.state.quiz.info}</p>
+                        <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p>
+                        <div className='btn-update'>
                         <button onClick={() => this.displayEdit()} className='btn-play' >Update</button>
+                        </div>
                     </div>
                     </div>
                         :
@@ -113,9 +118,9 @@ class Questions extends Component {
                                     <button className='btn-play btn-done' >Done</button>
                                 </Link>
                             </div>
-                    <div className='kwizz-container'>
-                        <h1>{this.state.quiz.quiz_name}</h1>
-                        <p>{this.state.quiz.info}</p>
+                    <div className='kwizz-container-edit'>
+                        <h1 className='kwizz-title'>{this.state.quiz.quiz_name}</h1>
+                        <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p>
                         <input placeholder='New name' onChange={(e) => this.setState({ newName: e.target.value })} />
                         <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
                     <div className='btn-container'>
@@ -125,13 +130,14 @@ class Questions extends Component {
                     </div>
                     </div>
                 }
-                <div className='mapped-questions'>
-                    {mappedQuestions}
-                </div>
                 <div>
                     <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
                         <button className='btn-play'>Add Question</button>
                     </Link>
+                <br /><br />
+                <div className='mapped-questions'>
+                    {mappedQuestions}
+                </div>
                 </div>
             </div>
         )
