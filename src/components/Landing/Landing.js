@@ -70,12 +70,11 @@ class Landing extends Component {
 
                         </div>
                 }
-                <div className='kwizzard-wrapper'>
-                <img src={Kwizzard} alt='' className='kwizzard'/>
-                
-                <div className='btn-host' >
-                    <a id='atag' href='http://localhost:3030/auth'>HOST</a>
-                </div>
+                <div>
+                    <img src={Kwizzard} alt='' className='kwizzard'/>
+                    <div className='btn-host' >
+                        <a id='atag' href='http://localhost:3030/auth'>HOST</a>
+                    </div>
                 </div>
             </div>
         )

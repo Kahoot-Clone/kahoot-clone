@@ -69,13 +69,13 @@ class Main extends Component {
                 <div className='host-logo-container'>
                     <img src={Kwizz} alt='kwizz logo' className='logo'/>
                 </div> 
-                <div className='mapped-Kwizzes-container' >
-                {mappedQuizzes}
-                </div> 
                 <div className='newKwizz' >
                     <Link to='/host/newquiz'>
                     <button className='btn-new'>New Kwizz!</button>
                     </Link>
+                </div> 
+                <div className='mapped-Kwizzes-container' >
+                {mappedQuizzes}
                 </div> 
             </div> 
         )
