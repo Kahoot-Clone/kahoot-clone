@@ -1,66 +1,122 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import io from 'socket.io-client';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import GameQuestions from './Game_Questions';
 import GameQuestionOver from './Game_Question_Over';
+import GameOver from './Game_Over';
 
 class Game extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             pin: 0,
-            quiz:{
-                players:[]
-            },
-            gameStarted: false,
-            questionOver: false
+            timer: 30,
+            isLive: false,
+            questionOver: false,
+            gameOver: false,
+            currentQuestion: 0,
+            questions: [],
+            players: [],
+            playerCounter: 0,
+            leaderBoard: []
         }
-        this.generatePin = this.generatePin.bind(this);
         this.questionOver = this.questionOver.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
     }
-    componentDidMount(){
+    componentDidMount() {
+        axios.get(`/api/getquestions/${this.props.quiz.id}`).then(res => {
+            this.setState({questions: res.data})
+        })
         this.socket = io('/');
         this.generatePin();
-        this.socket.on('room-joined', (quiz) => {
-            this.setState({quiz: quiz})
-        }  )
-    }
-    generatePin(){
-        let newPin = Math.floor(Math.random()*9000, 10000)
-        this.setState({pin: newPin})
-        this.socket.emit('host-join', {quiz:this.props.quiz, pin:newPin});
-    }
-    startGame(){
-        let {pin} = this.state
-        this.socket.emit('game-started', {
-            pin
+        this.socket.on('room-joined', data => {
+            this.addPlayer(data.name, data.id)
         })
+        this.socket.on('player-answer', data => {
+            this.submitAnswer(data.name, data.answer)
+        })
+
+    }
+    generatePin() {
+        let newPin = Math.floor(Math.random() * 9000, 10000)
+        this.setState({ pin: newPin })
+        this.socket.emit('host-join', { pin: newPin });
+    }
+    startGame() {
+        let {players} = this.state;
+        if (players[0] && players[1] && players[2]){
+            this.nextQuestion()
+            this.setState({
+                isLive: true
+            })
+        } else{
+            alert('You need at least 3 players to start')
+        }
+    }
+    questionOver() {
+        let { pin} = this.state
+        this.socket.emit('question-over', { pin })
+        this.getLeaderBoard()
         this.setState({
-            gameStarted: true
+            questionOver: true,
+            currentQuestion: this.state.currentQuestion + 1,
+            timer: 30
         })
     }
-    questionOver(){
-        let {pin} = this.state
-        this.socket.emit('question-over', {pin} )
+
+    nextQuestion() {
+        let {pin, questions, currentQuestion} = this.state;
+        currentQuestion === questions.length  ?
         this.setState({
-            questionOver:true
+            gameOver: true
         })
-    }
-    nextQuestion(){
-        let {pin, quiz} = this.state
-        quiz.nextQuestion()                    // Getting error that says quiz.nextQuestion is not a function. we may need to call it on the back end or it could be an issue with binding.
-        this.socket.emit('next-question', {pin})
+        :
+        this.socket.emit('next-question',{pin})
         this.setState({
             questionOver: false
         })
     }
-  
+    addPlayer (name, id){
+        let player = {
+            id: id, // this is now their socket id so they can pull their score to the player component using this
+            name: name,
+            score: 0,
+            qAnswered: false
+        }
+        let newPlayers = [...this.state.players]
+        newPlayers.push(player)
+        console.log(newPlayers)
+        this.setState({
+            players: newPlayers,
+            playerCounter: this.state.playerCounter + 1
+        })
+    }
+    submitAnswer(name, answer){
+        let player = this.state.players.filter(player => player.name === name);
+        let updatedPlayers = this.state.players.filter(player => player.name !== name);
+       if (this.state.questions[this.state.currentQuestion].correctanswer === answer){
+           player[0].score += 100
+
+       } 
+        updatedPlayers.push(player)
+
+        this.setState({
+            players: updatedPlayers
+        })
+    }
+    getLeaderBoard(){
+        let unsorted = [...this.state.players];
+        let leaderboard = unsorted.sort((a, b) => b.score - a.score)
+        this.setState({
+            leaderBoard: leaderboard
+        })
+    }
     render() {
-        console.log(this.state.quiz)
-        let {pin, quiz, gameStarted, questionOver} = this.state;
-        let mappedPlayers = this.state.quiz.players.map(player => {
-            return(
+        console.log(this.state)
+        let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
+        let mappedPlayers = this.state.players.map(player => {
+            return (
                 <p key={player.id}>{player.name}</p>
             )
         })
@@ -68,30 +124,33 @@ class Game extends Component {
             <div>
                 <h1>{pin}</h1>
                 {
-                   !gameStarted && !questionOver ?
-                <div>
-                    <button onClick={()=> this.startGame()}>Play</button>
-                    {mappedPlayers}
-                </div> 
-                   :
-                   gameStarted && !questionOver ?
-                   <GameQuestions
-                    question={quiz.questions[quiz.currentQuestion].question}
-                    answer1={quiz.questions[quiz.currentQuestion].answer1}
-                    answer2={quiz.questions[quiz.currentQuestion].answer2} 
-                    answer3={quiz.questions[quiz.currentQuestion].answer3} 
-                    answer4={quiz.questions[quiz.currentQuestion].answer4} 
-                    questionOver={this.questionOver}/>
-                   :
-                   <GameQuestionOver nextQuestion={this.nextQuestion}/>
+                    !isLive && !questionOver && !gameOver?
+                        <div>
+                            <button onClick={() => this.startGame()}>Play</button>
+                            {mappedPlayers}
+                        </div>
+                        :
+                        isLive && !questionOver && !gameOver?
+                            <GameQuestions
+                                question={questions[currentQuestion].question}
+                                answer1={questions[currentQuestion].answer1}
+                                answer2={questions[currentQuestion].answer2}
+                                answer3={questions[currentQuestion].answer3}
+                                answer4={questions[currentQuestion].answer4}
+                                questionOver={this.questionOver} />
+                            :
+                            isLive && questionOver && !gameOver ?
+                            <GameQuestionOver nextQuestion={this.nextQuestion} />
+                            :
+                            <GameOver leaderboard ={this.state.leaderBoard}/>
                 }
-            </div> 
+            </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         quiz: state.quiz
     }
 }

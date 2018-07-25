@@ -28,36 +28,26 @@ io.on('connection', socket => {
     
     // Host Connection
     socket.on('host-join', (data) => {
-        socket.join(data.pin)
-        
-        let currentQuiz = new Quiz(data.quiz, app);
-        socket.adapter.rooms[data.pin]['quiz'] = currentQuiz;
-        socket.emit('room-joined', currentQuiz)
+        socket.join(data.pin)   
     })
     //Player Join Room
     socket.on('player-joined', (data) => {
-        console.log(data)
        socket.join(data) 
     })
     //Add player to Quiz Object
     socket.on('player-add', (data) => {
-        socket.adapter.rooms[data.selectedPin].quiz.addPlayer(data.nickname);
-        socket.to(`${data.selectedPin}`).emit('room-joined', socket.adapter.rooms[data.selectedPin]['quiz']);
-        console.log(socket.adapter.rooms);
+        socket.to(`${data.selectedPin}`).emit('room-joined', {name: data.nickname, id: socket.id});
     })
 
-    socket.on('game-started', (data) => {
-        
-        socket.to(`${data.pin}`).emit('game-started')
-    })
     socket.on('question-over', (data) => {
         socket.to(`${data.pin}`).emit('question-over')
     })
     socket.on('next-question', (data) => {
         socket.to(`${data.pin}`).emit('next-question')
+
     })
     socket.on('question-answered', (data) => {
-        socket.adapter.rooms[data.selectedPin].quiz.submitAnswer(data.playerId, data.answer)
+        socket.to(data.pin).emit('player-answer', {name : data.name, answer: data.answer})
     })
 
 })
