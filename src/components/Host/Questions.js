@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { editingQuiz } from '../../Ducks/Reducer';
-import './Host-Question.css'
-import './Host.css'
+import './Host-Question.css';
+import './Host.css';
 
 class Questions extends Component {
     constructor() {
@@ -71,20 +71,22 @@ class Questions extends Component {
         if (questions) {
             var mappedQuestions = questions.map((question) => {
                 return (
-                    <div key={question.id} className=''>
+                    <div key={question.id} className='question-container'>
                         <h1>{question.question}</h1>
                         <ul>
-                            <li>1:{question.answer1}</li>
-                            <li>2:{question.answer2}</li>
-                            <li>3:{question.answer3}</li>
-                            <li>4:{question.answer4}</li>
-                            <li>Correct:{question.correctanswer}</li>
+                            <li>1: {question.answer1}</li>
+                            <li>2: {question.answer2}</li>
+                            <li>3: {question.answer3}</li>
+                            <li>4: {question.answer4}</li>
+                            <li>Correct: {question.correctanswer}</li>
 
                         </ul>
-                        <Link to={`/host/editquestion/${question.id}`}>
-                            <button className='btn-play' >Edit</button>
-                        </Link>
-                        <button onClick={() => this.deleteQuestion(question.id)} className='btn-play'>Delete</button>
+                        <div className='btn-container-edit' >
+                            <Link to={`/host/editquestion/${question.id}`}>
+                                <button className='btn-play' >Edit</button>
+                            </Link>
+                            <button onClick={() => this.deleteQuestion(question.id)} className='btn-play'>Delete</button>
+                        </div> 
                     </div>
                 )
             })
@@ -119,27 +121,30 @@ class Questions extends Component {
                                 </Link>
                             </div>
                     <div className='kwizz-container-edit'>
-                        <h1 className='kwizz-title'>{this.state.quiz.quiz_name}</h1>
-                        <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p>
-                        <input placeholder='New name' onChange={(e) => this.setState({ newName: e.target.value })} />
-                        <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
-                    <div className='btn-container'>
+                        {/* <h1 className='kwizz-title'>{this.state.quiz.quiz_name}</h1>
+                        <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p> */}
+                        <input placeholder={this.state.quiz.quiz_name} onChange={(e) => this.setState({ newName: e.target.value })} className='title-input input-edit ' />
+                        <br/>
+                        <textarea placeholder={this.state.quiz.info} onChange={(e) => this.setState({ newInfo: e.target.value })} className='desc-input input-edit'></textarea>
+                    <div className='btn-container-edit'>
                         <button onClick={() => this.updateQuiz()} className='btn-play'>Save</button>
                         <button onClick={() => this.displayEdit()} className='btn-play' >Cancel</button>
                     </div>
                     </div>
                     </div>
                 }
-                <div>
-                    <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
-                        <button className='btn-play'>Add Question</button>
-                    </Link>
-                <br /><br />
-                <div className='mapped-questions'>
-                    {mappedQuestions}
+                <div className='question-edit-wrapper' >
+                    <div className='add-quesiton-div' >
+                        <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
+                            <button className='btn-play' id='add-question-btn'>Add Question</button>
+                        </Link>
+                    </div> 
+                    <br /><br />
+                    <div  className='mapped-questions' >
+                        {mappedQuestions}
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
         )
     }
 }
