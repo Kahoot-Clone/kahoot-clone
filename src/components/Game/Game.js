@@ -99,8 +99,8 @@ class Game extends Component {
            player[0].score += 100
 
        } 
-        updatedPlayers.push(player)
-
+        updatedPlayers.push(player[0])
+        console.log(updatedPlayers)
         this.setState({
             players: updatedPlayers
         })
@@ -108,6 +108,7 @@ class Game extends Component {
     getLeaderBoard(){
         let unsorted = [...this.state.players];
         let leaderboard = unsorted.sort((a, b) => b.score - a.score)
+        console.log(leaderboard)
         this.setState({
             leaderBoard: leaderboard
         })
