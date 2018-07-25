@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { editingQuiz } from '../../Ducks/Reducer';
 import './Host-Question.css'
+import './Host.css'
 
 class Questions extends Component {
     constructor() {
@@ -92,35 +93,41 @@ class Questions extends Component {
                 { 
                     !this.state.toggle 
                         ?
-                    <div>
+                    <div className='toggle-container'>
                         <div className='btn-done-div'>
                             <Link to='/host'>
                                 <button className='btn-play btn-done' >Done</button>
                             </Link>
                         </div>
-                    <div>
-                        <h1 className='kwizz-info kwizz-title'>{this.state.quiz.quiz_name}</h1>
+                    <div className='kwizz-container'>
+                        <h1>{this.state.quiz.quiz_name}</h1>
+                        <br />
                         <p>{this.state.quiz.info}</p>
                         <button onClick={() => this.displayEdit()} className='btn-play' >Update</button>
                     </div>
                     </div>
                         :
-                        <div>
-                <Link to='/host'>
-                    <button className='btn-play' >Done</button>
-                </Link>
+                        <div className='toggle-container'>
+                            <div className='btn-done-div'>
+                                <Link to='/host'>
+                                    <button className='btn-play btn-done' >Done</button>
+                                </Link>
+                            </div>
+                    <div className='kwizz-container'>
                         <h1>{this.state.quiz.quiz_name}</h1>
                         <p>{this.state.quiz.info}</p>
                         <input placeholder='New name' onChange={(e) => this.setState({ newName: e.target.value })} />
                         <textarea placeholder='New description' onChange={(e) => this.setState({ newInfo: e.target.value })}></textarea>
-                    
+                    <div className='btn-container'>
                         <button onClick={() => this.updateQuiz()} className='btn-play'>Save</button>
                         <button onClick={() => this.displayEdit()} className='btn-play' >Cancel</button>
-                    
-                        <hr />
+                    </div>
+                    </div>
                     </div>
                 }
-                {mappedQuestions}
+                <div className='mapped-questions'>
+                    {mappedQuestions}
+                </div>
                 <div>
                     <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
                         <button className='btn-play'>Add Question</button>

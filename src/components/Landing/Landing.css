@@ -6,6 +6,19 @@
     min-width: 50%;
     height: 400px;
   }
+
+  .kwizzard-wrapper{
+    text-align: center;
+    min-width: 50%;
+    height: 300px;
+  }
+
+  .kwizzard{
+    padding-bottom: 10px;
+    height:300px;
+    box-sizing: border-box
+}
+
   .player-input-wrapper{
     width: 250px;
   }
@@ -42,7 +55,7 @@
     font-weight: 700;
     font-size: 20px;
   }
-  
+
   .btn-host{
     display: block;
     text-align: center;
