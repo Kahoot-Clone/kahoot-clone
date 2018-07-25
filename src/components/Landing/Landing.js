@@ -48,7 +48,7 @@ class Landing extends Component {
                             <div className='logo-container' >
                             <img src={Kwizz} alt='Kwizz logo' className='logo'/>
                             </div> 
-                            <div>
+                            <div className='player-input-wrapper' >
                                 <input type='number' value={this.state.pin} placeholder='Game PIN' onChange={this.handleInput} className='input-user'/>
                                 <button onClick={this.handleToggle} className='btn-enter' >Enter</button>
                             </div> 
