@@ -1,7 +1,6 @@
 import React from 'react';
-// import check from '../../Assests/kwizz-check.svg';
-import x from '../../Assests/kwizz-x.svg';
-import Check from '../animations/Check.js'
+import Check from '../animations/Check.js';
+import Incorrect from '../animations/Incorrect.js';
 
 export default function PlayerQuestionOver(props){
     return (
@@ -11,13 +10,12 @@ export default function PlayerQuestionOver(props){
                 ?
                 <div className='answer correct' >
                     <h1 className='answer-indicator' >Correct</h1>
-                    {/* <img src={check} alt='' className='answer-check-x'/> */}
                         <Check/>
                 </div> 
                 :
                 <div className='answer incorrect' >
                     <h1 className='answer-indicator' >Incorrect</h1>
-                    <img src={x} alt='' className='answer-check-x' />
+                        <Incorrect/>
                 </div> 
             }           
         </div> 

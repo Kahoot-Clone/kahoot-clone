@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import PlayerQuestions from './Player_Questions';
 import PlayerQuestionOver from './Player_Question_Over';
 import './Game.css';
-import load from '../../Assests/load-circle.svg'
+import load from '../../Assests/load-circle-outline.svg'
 
 class Player extends Component {
     constructor() {

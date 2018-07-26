@@ -11,10 +11,6 @@
     grid-auto-rows: minmax(18em, auto);
 }
 
-
-
-
-
 /* shapes------------------------------------ */
 .q1{
     background-color: #e91b1b;
@@ -73,9 +69,7 @@
 .incorrect{
     background-color: #EF3D5B;
 }
-.answer-check-x{
-    height: 20%;
-}
+
 .answer-indicator{
     width: 100vw;
     font-family: BPreplay,sans-serif;
@@ -95,9 +89,6 @@
     padding-top: 40%;
 }
 /* Player-Question-Over---------------------- */
-
-
-
 
 
  .answer-container p{
@@ -129,6 +120,7 @@
     color: #333;
     padding-left: 1em;
   }
+  
 #pin{
     padding-top: .5em;
 }
