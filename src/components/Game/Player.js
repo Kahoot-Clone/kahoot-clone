@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import PlayerQuestions from './Player_Questions';
 import PlayerQuestionOver from './Player_Question_Over';
 import './Game.css';
+import load from '../../Assests/load-circle.svg'
 
 class Player extends Component {
     constructor() {
@@ -55,7 +56,7 @@ class Player extends Component {
         return (
             <div className='player-container' >
                 <div className='status-bar'>
-                    <p className='player-info' >PIN: {this.props.selectedPin}</p>
+                    <p className='player-info' id='pin' >PIN: {this.props.selectedPin}</p>
                 </div> 
                 {
                     !gameStarted && !questionOver
@@ -65,6 +66,12 @@ class Player extends Component {
                              <br />
                                 Do you see your nickname on the screen?
                             </p>
+                             <div className='answer-container'>
+                                    <div className=' q-blank q'></div> 
+                                    <div className=' q-blank q'></div> 
+                                    <div className=' q-blank q'></div> 
+                                    <div className=' q-blank q'></div> 
+                             </div> 
                         </div>
                         :
                         gameStarted && !questionOver && !answerSubmitted
@@ -73,15 +80,27 @@ class Player extends Component {
                         :
                         gameStarted && !questionOver && answerSubmitted
                         ?
-                        <div>
-                            Did You answer too fast????
+                        <div className='waiting-for-results' >
+                            <p className='answer-indicator' id= 'too-fast'>Did You answer too fast????</p>
+                            <img src={load} alt='' className='load-circle' />
                         </div> 
                         :
-                        <PlayerQuestionOver />
+                        <PlayerQuestionOver
+                         answeredCorrect={this.state.answeredCorrect}
+                        />
                     }
                     <div className='status-bar' >
+                    
                     <p className='player-info'>{this.props.nickname}</p>
-                    <div className='status-bar-score' >{this.state.score}</div> 
+                    <div 
+                        className={ 
+                          gameStarted && !questionOver && answerSubmitted
+                          ?
+                          'status-bar-hidden'
+                          :
+                          'status-bar-score'
+                        }
+                         >{this.state.score}</div> 
                     </div> 
             </div>
         )

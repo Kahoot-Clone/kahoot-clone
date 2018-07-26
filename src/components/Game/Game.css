@@ -40,6 +40,11 @@
     border-radius: 4px;
 }
 
+.q-blank{
+    box-shadow:  0 4px 6px 1px rgba(136, 136, 136, 0.062);
+    border-radius: 4px;
+}
+
 .shape{
     width: 140px;
     padding-top: 75px;
@@ -47,6 +52,49 @@
 /* shapes------------------------------------ */
 
 
+
+/* Player-Question-Over---------------------- */
+.answer{
+    width: 100vw;
+    height: 80vh;
+    margin: 0px 0px 20px 0px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 40%;
+    box-sizing: border-box;
+}
+
+.correct{
+    background-color: #6CBE45;
+}
+
+.incorrect{
+    background-color: #EF3D5B;
+}
+.answer-check-x{
+    height: 20%;
+}
+.answer-indicator{
+    width: 100vw;
+    font-family: BPreplay,sans-serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    text-rendering: optimizeLegibility;
+    line-height: normal;
+    margin: 0;
+    text-transform: none;
+    text-shadow: none;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: block;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    padding-top: 40%;
+}
+/* Player-Question-Over---------------------- */
 
 
 
@@ -81,6 +129,9 @@
     color: #333;
     padding-left: 1em;
   }
+#pin{
+    padding-top: .5em;
+}
 
 .status-bar-score{
     overflow: hidden;
@@ -96,14 +147,67 @@
     box-sizing: border-box;
 }
 
+.status-bar-hidden{
+    overflow: hidden;
+    min-width: 5rem;
+    margin: 0 1em 1em;
+    background: #333;
+    border-radius: .1875rem;
+    font-size: 1rem;
+    line-height: 1.875;
+    text-align: center;
+    color:#333;
+    padding-top: 6px;
+    box-sizing: border-box;
+}
 
- @media(min-width: 700px ){
-     .diamond{
-          width: 16vw;
-         margin-top: 56px;
+
+/* load animation--------------------------- */
+.waiting-for-results{
+    width: 100vw;
+    height: 80vh;
+    margin: 0px 0px 20px 0px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 40%;
+    box-sizing: border-box;
+    background-color: #7E56A4;
+    animation-name: color;
+    animation-duration: 10s;
+    animation-iteration-count: infinite; 
+    animation-timing-function: linear; 
+}
+
+.load-circle{
+    width: 100vw;
+    height: 30%;
+    animation: load-spin 1050ms;
+    animation-delay: 500ms;
+    animation-iteration-count: infinite; 
+    animation-timing-function: ease-in-out;
+}
+
+#too-fast{
+    width: 70%;
+    font-size: 1.5rem;
+}
+
+@keyframes load-spin{
+    0%   {transform: rotate(0deg)}
+    75% {transform: rotate(360deg)}
+    100% {transform: rotate(360deg)}
+}
+/* load animation--------------------------- */
+
+@media(min-width: 700px ){
+    .diamond{
+        width: 16vw;
+        margin-top: 56px;
     }
-     .q{
-         height: 400px;
+    .q{
+        height: 400px;
          box-sizing: border-box;
          text-align: center;
          padding-top: 24px;
