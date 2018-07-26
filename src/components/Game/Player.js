@@ -12,7 +12,9 @@ class Player extends Component {
             pinCorrect: false,
             gameStarted: false,
             questionOver: false,
-            answerSubmitted: false
+            answerSubmitted: false,
+            answeredCorrect: false,
+            score: 0
         }
         this.submitAnswer = this.submitAnswer.bind(this);
     }
@@ -32,6 +34,12 @@ class Player extends Component {
                 gameStarted: true,
                 questionOver: false,
                 answerSubmitted: false
+            })
+        })
+        this.socket.on('sent-info', data => {
+            this.setState({
+                answeredCorrect: data.answeredCorrect,
+                score: this.state.score + data.score
             })
         })
     }
@@ -73,7 +81,7 @@ class Player extends Component {
                     }
                     <div className='status-bar' >
                     <p className='player-info'>{this.props.nickname}</p>
-                    <div className='status-bar-score' >0</div> 
+                    <div className='status-bar-score' >{this.state.score}</div> 
                     </div> 
             </div>
         )
