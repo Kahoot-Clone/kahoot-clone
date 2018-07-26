@@ -1,10 +1,7 @@
 import React from 'react';
-import '../components/animations/animate.css';
-
 
 export default (
-
-<svg className='check'  xmlns='http://www.w3.org/2000/svg' width='360' height='279.8' fill='none'
+<svg className='path check'  xmlns='http://www.w3.org/2000/svg' width='360' height='279.8' fill='none'
 viewBox='0 0 360 279.8'>
     <switch>
         <g>
