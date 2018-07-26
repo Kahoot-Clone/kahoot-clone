@@ -6,5 +6,68 @@
 
 .btn-done{
     float: right;
-    margin: 0;
+    margin-right: 16px;
+}
+.btn-container-edit{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 160px;
+    box-sizing: border-box;
+}
+
+.btn-update{
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+#add-question-btn{
+    width: 200px;
+    height: 60px;
+}
+.add-quesiton-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.mapped-questions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2em; 
+    margin-bottom: 200px;
+}
+
+.toggle-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    height: 400px
+}
+.kwizz-container-edit{
+    height: 175px;
+    width: 600px;
+    background-color: rgba(255, 255, 255, 0.281);
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
+    margin-bottom: 20px;
+}
+
+.input-edit::placeholder{
+    color: rgba(255, 255, 255, 0.664);
+}
+.question-edit-wrapper{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.question-container{
+    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
+    background-color: rgba(255, 255, 255, 0.096);
+    border-radius: 4px;
 }

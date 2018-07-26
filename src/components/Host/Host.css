@@ -42,8 +42,8 @@
 }
 
 .kwizz-info{
-width: 100%;
-text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
 .kwizz-title{
@@ -77,9 +77,6 @@ text-align: center;
     font-size: 20px;
     padding-bottom: 12px;
     margin-bottom: 20px;
-}
-
-.btn-new:hover{
     animation: btn-new-hover 250ms;
 }
 
@@ -97,6 +94,7 @@ text-align: center;
     width: 100vw;
     display: flex;
     justify-content: center;
+    padding-top: 40px;
 }
 
 .ok-go-div{

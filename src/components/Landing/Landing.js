@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { handleNickname, selectedPin } from '../../Ducks/Reducer';
 import './Landing.css';
 import Kwizz from '../../Assests/Kwizz.svg'
+import Kwizzard from '../../Assests/Kwizzard--test-pixel.svg'
+
 
 class Landing extends Component {
     constructor() {
@@ -38,6 +40,7 @@ class Landing extends Component {
     handleGo() {
         this.props.handleNickname(this.state.nickname)
     }
+    
     render() {
         return (
             <div className='component-container' >
@@ -61,18 +64,22 @@ class Landing extends Component {
                             <div>
                                 <input type='text' value={this.state.nickname} placeholder='Nickname' onChange={this.handleNicknameInput} className='input-user' />
                                 <Link to='/player'>
-                                    <button onClick={this.handleGo} className='btn-enter' >OK,go!</button>
+                                    <button onClick={this.handleGo} className='btn-enter' >OK, go!</button>
                                 </Link>
                             </div> 
 
                         </div>
                 }
-                <div className='btn-host' >
-                    <a id='atag' href='http://localhost:3030/auth'>HOST</a>
+                <div>
+                    <img src={Kwizzard} alt='' className='kwizzard'/>
+                    <div className='btn-host' >
+                        <a id='atag' href='http://localhost:3030/auth'>HOST</a>
+                    </div>
                 </div>
             </div>
         )
     }
 }
+
 
 export default connect(null, { handleNickname, selectedPin })(Landing)

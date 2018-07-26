@@ -6,6 +6,14 @@
     min-width: 50%;
     height: 400px;
   }
+
+  .kwizzard{
+    padding-bottom: 10px;
+    padding-left: 40px;
+    height:200px;
+    box-sizing: border-box
+}
+
   .player-input-wrapper{
     width: 250px;
   }
@@ -42,7 +50,7 @@
     font-weight: 700;
     font-size: 20px;
   }
-  
+
   .btn-host{
     display: block;
     text-align: center;
@@ -56,6 +64,7 @@
     width: 250px;
     height: 50px;
     box-sizing: border-box;
+    margin-bottom: 20px;
   }
   #atag{
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
@@ -82,6 +91,11 @@
         display: flex;
         width: 100%;
         justify-content: center;
+    }
+
+    .kwizzard{
+      height: 300px;
+      padding-left: 0%;
     }
   
   }
