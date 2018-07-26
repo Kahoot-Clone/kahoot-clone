@@ -11,7 +11,7 @@ class Game extends Component {
         super();
         this.state = {
             pin: 0,
-            timer: 30,
+            timer: 20,
             isLive: false,
             questionOver: false,
             gameOver: false,
@@ -27,6 +27,7 @@ class Game extends Component {
     componentDidMount() {
         axios.get(`/api/getquestions/${this.props.quiz.id}`).then(res => {
             this.setState({ questions: res.data })
+            console.log(this.questions)
         })
         this.socket = io('/');
         this.generatePin();
@@ -58,28 +59,66 @@ class Game extends Component {
         let { pin, players } = this.state
         this.socket.emit('question-over', { pin })
         let updatedPlayers = [...players];
-        updatedPlayers.forEach(player => player.qAnswered = false)
+        updatedPlayers.forEach((player)=>{
+            player.qAnswered = false;
+            player.answeredCorrect = false;
+        })
         this.getLeaderBoard()
         this.setState({
             questionOver: true,
             currentQuestion: this.state.currentQuestion + 1,
-            timer: 30,
+            timer: 20,
             players: updatedPlayers
         })
+    }
+    timeKeeper() {
+        let timer = 20;
+        let players = [...this.state.players]
+
+        this.setState({ questionOver: false })
+
+        timeCheck = timeCheck.bind(this)
+
+        function timeCheck(){
+            let checkAnswers = ()=>{
+                let pAnswered = 0;
+                players.forEach((player)=>{
+                    player.qAnswered ? ++pAnswered :null
+                })
+                players.forEach(player => {
+                    if(player.answeredCorrect){
+                        player.score += (timer*10 +1000)
+                        this.socket.emit('sent-info', { id: player.id, score: player.score, answeredCorrect: player.answeredCorrect })
+                    }
+                    
+                });
+                pAnswered === players.length ? timer=0 : null
+                timer-=1;
+            }
+            let endQuestion = ()=>{
+                clearInterval(timeKept);
+                this.questionOver()
+            }
+            return timer > 0 
+            ? checkAnswers()
+            : endQuestion()
+        }
+        let timeKept = setInterval(()=>{timeCheck()}, 1000);
+        return timeKept
     }
 
     nextQuestion() {
         let { pin, questions, currentQuestion } = this.state;
-        currentQuestion === questions.length ?
-            this.setState({
-                gameOver: true
-            })
-            :
+
+        this.timeKeeper()
+
+        currentQuestion === questions.length 
+            ? this.setState({ gameOver: true })
+            : 
             this.socket.emit('next-question', { pin })
-        this.setState({
-            questionOver: false
-        })
+            this.setState({questionOver:false})      
     }
+
     addPlayer(name, id) {
         let player = {
             id: id, // this is now their socket id so they can pull their score to the player component using this
@@ -90,28 +129,29 @@ class Game extends Component {
         }
         let newPlayers = [...this.state.players]
         newPlayers.push(player)
-        console.log(newPlayers)
+        // console.log(newPlayers)
         this.setState({
             players: newPlayers,
             playerCounter: this.state.playerCounter + 1
         })
     }
+
     submitAnswer(name, answer) {
         let player = this.state.players.filter(player => player.name === name);
         let updatedPlayers = this.state.players.filter(player => player.name !== name);
+        
         player[0].qAnswered = true;
-        if (this.state.questions[this.state.currentQuestion].correctanswer === answer) {
-            player[0].score += 100;
-            player[0].answeredCorrect = true;
-        } else {
-            player[0].answeredCorrect = false;
-        }
+        answer === this.state.questions[this.state.currentQuestion].correctanswer
+            ?player[0].answeredCorrect = true
+            :player[0].answeredCorrect = false
+
         updatedPlayers.push(player[0])
         this.setState({
             players: updatedPlayers
         })
-        this.socket.emit('sent-info', { id: player[0].id, score: player[0].score, answeredCorrect: player[0].answeredCorrect })
+        
     }
+
     getLeaderBoard() {
         let unsorted = [...this.state.players];
         let leaderboard = unsorted.sort((a, b) => b.score - a.score)
@@ -120,6 +160,7 @@ class Game extends Component {
             leaderBoard: leaderboard
         })
     }
+
     render() {
         console.log(this.state)
         let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
