@@ -80,6 +80,10 @@
     animation: btn-new-hover 250ms;
 }
 
+.btn-new:hover{
+    transform: scale(1.09)
+}
+
 @keyframes btn-new-hover{
 
     25%{
