@@ -15,14 +15,6 @@ a{
   text-decoration: none;
 }
 
-
-
-@media(min-width:700px){
- .component-container{
-   justify-content: center;
- }
-}
-
 @keyframes color{
   0%{
     background-color: #00d0ff;
@@ -40,3 +32,11 @@ a{
     background-color: #00d0ff;
   }
 }
+
+
+@media(min-width:700px){
+  .component-container{
+    justify-content: center;
+  }
+ }
+ 

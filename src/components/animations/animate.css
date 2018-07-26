@@ -1,0 +1,37 @@
+.check-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.check{
+    width: 40%;
+    padding-bottom: 90%;
+    padding-left: 15px;
+  }
+   
+  path {
+    stroke: #fff;
+    fill:none;
+    stroke-width: 20%;
+    stroke-dasharray: 2500;
+    opacity: 10;
+    animation: animate 1000ms cubic-bezier(0,0.23,1,.1);
+    animation-timing-function: ease-in-out;
+  }
+  
+  @keyframes animate {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 2500;
+    }
+    20%{
+        stroke-dashoffset: 2500;
+    }
+    30% {
+        opacity: 10;
+    }
+    100% {
+        opacity: 10;
+        stroke-dashoffset: 0;
+    }
+  }
