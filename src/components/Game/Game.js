@@ -46,7 +46,8 @@ class Game extends Component {
     }
     startGame() {
         let { players } = this.state;
-        if (players[0] && players[1] && players[2]) {
+        if (players[0] //&& players[1] && players[2]
+        ) {
             this.nextQuestion()
             this.setState({
                 isLive: true
@@ -54,6 +55,16 @@ class Game extends Component {
         } else {
             alert('You need at least 3 players to start')
         }
+    }
+    hotTimer(){
+        this.setState({timer:20});
+        let countDown = ()=>{
+            this.state.timer > 0
+                ? this.setState({timer:this.state.timer-1})
+                : clearInterval(downer)
+        }
+        let downer = setInterval(()=>{countDown()}, 1000);
+        downer;
     }
     questionOver() {
         let { pin, players } = this.state
@@ -72,7 +83,7 @@ class Game extends Component {
         })
     }
     timeKeeper() {
-        let timer = 20;
+        let internalTimer = 20;
         let players = [...this.state.players]
 
         this.setState({ questionOver: false })
@@ -87,19 +98,19 @@ class Game extends Component {
                 })
                 players.forEach(player => {
                     if(player.answeredCorrect){
-                        player.score += (timer*10 +1000)
+                        player.score += (internalTimer*10 +1000)
                         this.socket.emit('sent-info', { id: player.id, score: player.score, answeredCorrect: player.answeredCorrect })
                     }
                     
                 });
-                pAnswered === players.length ? timer=0 : null
-                timer-=1;
+                pAnswered === players.length ? internalTimer=0 : null
+                internalTimer-=1;
             }
             let endQuestion = ()=>{
                 clearInterval(timeKept);
                 this.questionOver()
             }
-            return timer > 0 
+            return internalTimer > 0 
             ? checkAnswers()
             : endQuestion()
         }
@@ -109,8 +120,8 @@ class Game extends Component {
 
     nextQuestion() {
         let { pin, questions, currentQuestion } = this.state;
-
-        this.timeKeeper()
+        this.timeKeeper();
+        this.hotTimer();
 
         currentQuestion === questions.length 
             ? this.setState({ gameOver: true })
@@ -163,7 +174,7 @@ class Game extends Component {
 
     render() {
         console.log(this.state)
-        let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
+        let { pin, questions, currentQuestion, isLive, questionOver, gameOver, timer } = this.state;
         let mappedPlayers = this.state.players.map(player => {
             return (
                 <p key={player.id}>{player.name}</p>
@@ -181,6 +192,7 @@ class Game extends Component {
                         :
                         isLive && !questionOver && !gameOver ?
                             <GameQuestions
+                                timer={timer}
                                 question={questions[currentQuestion].question}
                                 answer1={questions[currentQuestion].answer1}
                                 answer2={questions[currentQuestion].answer2}
