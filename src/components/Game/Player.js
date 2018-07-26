@@ -34,7 +34,8 @@ class Player extends Component {
             this.setState({
                 gameStarted: true,
                 questionOver: false,
-                answerSubmitted: false
+                answerSubmitted: false,
+                answeredCorrect: false
             })
         })
         this.socket.on('sent-info', data => {
