@@ -49,6 +49,10 @@ io.on('connection', socket => {
     socket.on('question-answered', (data) => {
         socket.to(data.pin).emit('player-answer', {name : data.name, answer: data.answer})
     })
+   
+    socket.on('sent-info', (data) => {
+        io.to(data.id).emit('sent-info', {answeredCorrect: data.answeredCorrect, score: data.score});
+    })
 
 })
 

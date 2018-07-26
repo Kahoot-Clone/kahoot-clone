@@ -26,7 +26,7 @@ class Game extends Component {
     }
     componentDidMount() {
         axios.get(`/api/getquestions/${this.props.quiz.id}`).then(res => {
-            this.setState({questions: res.data})
+            this.setState({ questions: res.data })
         })
         this.socket = io('/');
         this.generatePin();
@@ -44,45 +44,49 @@ class Game extends Component {
         this.socket.emit('host-join', { pin: newPin });
     }
     startGame() {
-        let {players} = this.state;
-        if (players[0] && players[1] && players[2]){
+        let { players } = this.state;
+        if (players[0] && players[1] && players[2]) {
             this.nextQuestion()
             this.setState({
                 isLive: true
             })
-        } else{
+        } else {
             alert('You need at least 3 players to start')
         }
     }
     questionOver() {
-        let { pin} = this.state
+        let { pin, players } = this.state
         this.socket.emit('question-over', { pin })
+        let updatedPlayers = [...players];
+        updatedPlayers.forEach(player => player.qAnswered = false)
         this.getLeaderBoard()
         this.setState({
             questionOver: true,
             currentQuestion: this.state.currentQuestion + 1,
-            timer: 30
+            timer: 30,
+            players: updatedPlayers
         })
     }
 
     nextQuestion() {
-        let {pin, questions, currentQuestion} = this.state;
-        currentQuestion === questions.length  ?
-        this.setState({
-            gameOver: true
-        })
-        :
-        this.socket.emit('next-question',{pin})
+        let { pin, questions, currentQuestion } = this.state;
+        currentQuestion === questions.length ?
+            this.setState({
+                gameOver: true
+            })
+            :
+            this.socket.emit('next-question', { pin })
         this.setState({
             questionOver: false
         })
     }
-    addPlayer (name, id){
+    addPlayer(name, id) {
         let player = {
             id: id, // this is now their socket id so they can pull their score to the player component using this
             name: name,
             score: 0,
-            qAnswered: false
+            qAnswered: false,
+            answeredCorrect: false
         }
         let newPlayers = [...this.state.players]
         newPlayers.push(player)
@@ -92,20 +96,23 @@ class Game extends Component {
             playerCounter: this.state.playerCounter + 1
         })
     }
-    submitAnswer(name, answer){
+    submitAnswer(name, answer) {
         let player = this.state.players.filter(player => player.name === name);
         let updatedPlayers = this.state.players.filter(player => player.name !== name);
-       if (this.state.questions[this.state.currentQuestion].correctanswer === answer){
-           player[0].score += 100
-
-       } 
+        player[0].qAnswered = true;
+        if (this.state.questions[this.state.currentQuestion].correctanswer === answer) {
+            player[0].score += 100;
+            player[0].answeredCorrect = true;
+        } else {
+            player[0].answeredCorrect = false;
+        }
         updatedPlayers.push(player[0])
-        console.log(updatedPlayers)
         this.setState({
             players: updatedPlayers
         })
+        this.socket.emit('sent-info', { id: player[0].id, score: player[0].score, answeredCorrect: player[0].answeredCorrect })
     }
-    getLeaderBoard(){
+    getLeaderBoard() {
         let unsorted = [...this.state.players];
         let leaderboard = unsorted.sort((a, b) => b.score - a.score)
         console.log(leaderboard)
@@ -125,13 +132,13 @@ class Game extends Component {
             <div>
                 <h1>{pin}</h1>
                 {
-                    !isLive && !questionOver && !gameOver?
+                    !isLive && !questionOver && !gameOver ?
                         <div>
                             <button onClick={() => this.startGame()}>Play</button>
                             {mappedPlayers}
                         </div>
                         :
-                        isLive && !questionOver && !gameOver?
+                        isLive && !questionOver && !gameOver ?
                             <GameQuestions
                                 question={questions[currentQuestion].question}
                                 answer1={questions[currentQuestion].answer1}
@@ -141,9 +148,9 @@ class Game extends Component {
                                 questionOver={this.questionOver} />
                             :
                             isLive && questionOver && !gameOver ?
-                            <GameQuestionOver nextQuestion={this.nextQuestion} />
-                            :
-                            <GameOver leaderboard ={this.state.leaderBoard}/>
+                                <GameQuestionOver nextQuestion={this.nextQuestion} />
+                                :
+                                <GameOver leaderboard={this.state.leaderBoard} />
                 }
             </div>
         )
