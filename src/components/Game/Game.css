@@ -11,27 +11,46 @@
     grid-auto-rows: minmax(18em, auto);
 }
 
+
+
+
+
+/* shapes------------------------------------ */
 .q1{
     background-color: #e91b1b;
-    border-radius: 1%;
-    padding-top: 40px;
+    text-align: center;
+    border-radius: 4px;
 }
+
 .q2{
     background-color: #1b48e9;
-    border-radius: 1%;
     text-align: center;
-    padding-top: 60px;
+    border-radius: 4px;
 }
+
 .q3{
     background-color: #e9c71b;
-    border-radius: 1%;
-    padding-top: 40px;
+    text-align: center;
+    border-radius: 4px;
 }
+
 .q4{
     background-color: #098626;
-    border-radius: 1%;
-    padding-top: 40px;
+    text-align: center;
+    border-radius: 4px;
 }
+
+.shape{
+    width: 140px;
+    padding-top: 75px;
+}
+/* shapes------------------------------------ */
+
+
+
+
+
+
 
  .answer-container p{
   margin: 0;
@@ -77,12 +96,6 @@
     box-sizing: border-box;
 }
 
-.shape{
-
-}
- .diamond{
-     width: 150px;
- }
 
  @media(min-width: 700px ){
      .diamond{

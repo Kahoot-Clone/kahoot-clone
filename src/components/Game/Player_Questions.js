@@ -12,7 +12,7 @@ export default function PlayerQuestion(props){
                 <img src={triangle} alt='' className='shape' />
             </div> 
             <div className='q2 q' onClick={() => props.submitAnswer(2)}>
-                <img src={diamond} alt=''className=' diamond'/>
+                <img src={diamond} alt=''className=' shape'/>
             </div> 
             <div className='q3 q' onClick={() => props.submitAnswer(3)}>
                 <img src={square} alt=''className='shape'/>
