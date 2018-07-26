@@ -1,5 +1,7 @@
-.new-question-wrapper{ 
+.new-question-wrapper{
+    position: relative; 
     width: 100vw;
+    height:100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -9,24 +11,24 @@
 }
 
 .answers-wrapper{
-    margin-top: 200px;
-    width: 66vw;
+    position: relative;
+    margin-top: 100px;
+    width: 55vw;
+    height: 300px;
     justify-content: center;
     display: flex;
+    background-color: rgb(9, 130, 201);
 }
 
-.answer{
-    text-align: center;
-    height:200px;
-    box-sizing: border-box;
-    margin: 0
+.answers{
+   height: 200px;
+   width: 100vw;
+   text-align: center;
 }
 
 .new-q{
     width: 100vw;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    text-align: center
 }
 
 .correct-wrapper{
