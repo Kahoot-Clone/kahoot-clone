@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import './Host-New-Question.css';
+import './Host.css';
 
 export default class New_Question extends Component {
     constructor() {
@@ -42,23 +45,41 @@ export default class New_Question extends Component {
             return <Redirect to='/host/questions' />;
         }
         return (
-                                    // I decided to just use arrow functions here instead of binding all of this at the top - Nate
-            <div>
-                <label>Question</label>
-                <input onChange={(e) => this.setState({ question: e.target.value })} />
-                <label>Answer1</label>
-                <input onChange={(e) => this.setState({ answer1: e.target.value })} />
-                <label>Answer2</label>
-                <input onChange={(e) => this.setState({ answer2: e.target.value })} />
-                <label>Answer3</label>
-                <input onChange={(e) => this.setState({ answer3: e.target.value })} />
-                <label>Answer4</label>
-                <input onChange={(e) => this.setState({ answer4: e.target.value })} />
+// I decided to just use arrow functions here instead of binding all of this at the top - Nate
+        <div className='new-question-wrapper'>
+            <Link to='/host/questions'>
+                go back
+            </Link>
+                <div className='new-q'>
+                    <label>Question</label>
+                    <input onChange={(e) => this.setState({ question: e.target.value })} />
+                </div>
+            <div className='answers-wrapper'>
+                <div className='answer'>   
+                    <label>Answer1</label>
+                        <input onChange={(e) => this.setState({ answer1: e.target.value })} />
+                </div>
+                <div className='answer'>
+                    <label>Answer2</label>
+                        <input onChange={(e) => this.setState({ answer2: e.target.value })} />
+                </div>
+                <div className='answer'>
+                    <label>Answer3</label>
+                        <input onChange={(e) => this.setState({ answer3: e.target.value })} />
+                </div>
+                <div className='answer'>
+                    <label>Answer4</label>
+                        <input onChange={(e) => this.setState({ answer4: e.target.value })} />
+                </div>
+            </div>
+            <div className='correct-wrapper'>
                 <label>Correct answer</label>
                 <input type='number' min='1' max='4' onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
-
-                <button onClick={this.addQuestion}>Next</button>
+                    <div className='next'>
+                        <button onClick={this.addQuestion}  className='btn-new'>Next</button>
+                    </div>
             </div>
+        </div>
         )
     }
 }

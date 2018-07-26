@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import './Host-New-Question.css';
+import './Host.css';
 
 export default class Edit_Question extends Component {
     constructor() {
@@ -54,27 +57,42 @@ export default class Edit_Question extends Component {
         if (this.state.redirect) {
             return <Redirect to='/host/questions' />
         }
-        return (                                        // Used a bunch of arrow functions here instead of binding at top - Nate
-            <div>
+        return (                                        
+// Used a bunch of arrow functions here instead of binding at top - Nate
+        <div className='mapped-container'>
+        <Link to='/host/questions'>
+        go back
+        </Link>
+            <div className='new-q'>
                 <label>Question</label>
                 <input value={this.state.question} onChange={(e) => this.setState({ question: e.target.value })} />
+            </div>
                 <br />
+            <div className='new-q'>
                 <label>Answer1</label>
                 <input value={this.state.answer1} onChange={(e) => this.setState({ answer1: e.target.value })} />
+            </div>
                 <br />
+            <div className='new-q'>
                 <label>Answer2</label>
                 <input value={this.state.answer2} onChange={(e) => this.setState({ answer2: e.target.value })} />
+            </div>
                 <br />
+            <div className='new-q'>
                 <label>Answer3</label>
                 <input value={this.state.answer3} onChange={(e) => this.setState({ answer3: e.target.value })} />
+            </div>
                 <br />
+            <div className='new-q'>
                 <label>Answer4</label>
                 <input value={this.state.answer4} onChange={(e) => this.setState({ answer4: e.target.value })} />
+            </div>
                 <br />
+            <div className='new-q'>
                 <label>Correct Answer</label>
                 <input type='number' value={this.state.correctAnswer} onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
                 <button onClick={() => this.updateQuestion()}>Update</button>
-
+            </div>
 
             </div>
         )

@@ -135,8 +135,8 @@ class Questions extends Component {
                 }
                 <div className='question-edit-wrapper' >
                     <div className='add-quesiton-div' >
-                        <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} >
-                            <button className='btn-play' id='add-question-btn'>Add Question</button>
+                        <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} className='btn-link'>
+                            <button className='btn-new' id='add-question-btn'>Add Question</button>
                         </Link>
                     </div> 
                     <br /><br />

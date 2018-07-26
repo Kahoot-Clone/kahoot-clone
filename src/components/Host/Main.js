@@ -52,13 +52,13 @@ class Main extends Component {
         let mappedQuizzes = quizzes.map(quiz => {
             return(
                 <div key={quiz.id} className='kwizz-container' >
-                    <h1 className='kwizz-info kwizz-title' >{quiz.quiz_name}</h1>
-                    <p className='kwizz-info kwizz-desc'>{quiz.info}</p>
+                        <h1 className='kwizz-info kwizz-title' >{quiz.quiz_name}</h1>
+                        <p className='kwizz-info kwizz-desc'>{quiz.info}</p>
                     <div className='btn-container' >
-                    <button onClick={() => this.setRedirect(quiz)} className='btn-play' >Play</button>
-                    <button onClick={() =>  this.deleteQuiz(quiz.id)} className='btn-play' >Delete</button>
+                        <button onClick={() => this.setRedirect(quiz)} className='btn-play' >Play</button>
+                        <button onClick={() =>  this.deleteQuiz(quiz.id)} className='btn-play' >Delete</button>
                     <Link to='/host/questions'>
-                    <button onClick={()=> this.props.editingQuiz(quiz)} className='btn-play' >Edit</button>
+                        <button onClick={()=> this.props.editingQuiz(quiz)} className='btn-play' >Edit</button>
                     </Link>
                     </div> 
                 </div> 
@@ -70,7 +70,7 @@ class Main extends Component {
                     <img src={Kwizz} alt='kwizz logo' className='logo'/>
                 </div> 
                 <div className='newKwizz' >
-                    <Link to='/host/newquiz'>
+                    <Link to='/host/newquiz' className='btn-link'>
                     <button className='btn-new'>New Kwizz!</button>
                     </Link>
                 </div> 

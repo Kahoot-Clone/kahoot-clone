@@ -1,0 +1,44 @@
+.new-question-wrapper{ 
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(9, 130, 201);
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    font-weight: 700; 
+}
+
+.answers-wrapper{
+    margin-top: 200px;
+    width: 66vw;
+    justify-content: center;
+    display: flex;
+}
+
+.answer{
+    text-align: center;
+    height:200px;
+    box-sizing: border-box;
+    margin: 0
+}
+
+.new-q{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.correct-wrapper{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.next{
+    width: 100vw;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap
+}
