@@ -177,16 +177,20 @@ class Game extends Component {
         let { pin, questions, currentQuestion, isLive, questionOver, gameOver, timer } = this.state;
         let mappedPlayers = this.state.players.map(player => {
             return (
-                <p key={player.id}>{player.name}</p>
+                <p key={player.id} className='player-name' >{player.name}</p>
             )
         })
         return (
-            <div>
+            <div className='component-container' >
+                <div className='pin'>
+                <p id='player-pin'>Kwizz Pin</p>
                 <h1>{pin}</h1>
+                </div> 
                 {
                     !isLive && !questionOver && !gameOver ?
-                        <div>
-                            <button onClick={() => this.startGame()}>Play</button>
+                        <div className='btn-players' >
+                            <button onClick={() => this.startGame()}className='btn-play' >Play</button>
+                            <p className='player-name' id='player-join'>Players joined!</p>
                             {mappedPlayers}
                         </div>
                         :

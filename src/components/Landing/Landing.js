@@ -5,6 +5,7 @@ import { handleNickname, selectedPin } from '../../Ducks/Reducer';
 import './Landing.css';
 import Kwizz from '../../Assests/Kwizz.svg'
 import Kwizzard from '../../Assests/Kwizzard--test-pixel.svg'
+import Stars from '../animations/Stars.js';
 
 
 class Landing extends Component {
@@ -44,6 +45,9 @@ class Landing extends Component {
     render() {
         return (
             <div className='component-container' >
+            <div>
+                <Stars/>
+                </div> 
                 {
                     !this.state.toggle
                         ?
@@ -52,7 +56,7 @@ class Landing extends Component {
                             <img src={Kwizz} alt='Kwizz logo' className='logo'/>
                             </div> 
                             <div className='player-input-wrapper' >
-                                <input type='number' value={this.state.pin} placeholder='Game PIN' onChange={this.handleInput} className='input-user'/>
+                                <input type='number' value={this.state.pin} placeholder='Kwizz! PIN' onChange={this.handleInput} className='input-user'/>
                                 <button onClick={this.handleToggle} className='btn-enter' >Enter</button>
                             </div> 
                         </div>
@@ -67,10 +71,9 @@ class Landing extends Component {
                                     <button onClick={this.handleGo} className='btn-enter' >OK, go!</button>
                                 </Link>
                             </div> 
-
                         </div>
                 }
-                <div>
+                <div className='logo-host' >
                     <img src={Kwizzard} alt='' className='kwizzard'/>
                     <div className='btn-host' >
                         <a id='atag' href='http://localhost:3030/auth'>HOST</a>

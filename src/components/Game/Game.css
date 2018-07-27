@@ -45,6 +45,12 @@
     width: 140px;
     padding-top: 75px;
 }
+
+.shape-question{
+    width: 80%;
+    float: left;
+    padding-top: 24%;
+}
 /* shapes------------------------------------ */
 
 
@@ -152,6 +158,75 @@
     padding-top: 6px;
     box-sizing: border-box;
 }
+
+.pin{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    font-size: 100px;
+    color: #fff;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    font-weight: 700;
+    padding-top: 100px;
+}
+
+.player-name{
+    width: 100%;
+    text-align: center;
+    font-size: 60px;
+    color: #fff;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    font-weight: 700;
+}
+
+.btn-players{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 200px;
+}
+
+#player-join{
+    color: #fff;
+   font-size: 24px;
+   padding-top: 6%;
+   font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+}
+#player-pin{
+    color: #fff;
+   font-size: 24px;
+   font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+}
+
+/* QUESTIONS-------------------------------------- */
+.question{
+    padding: 16px;
+}
+
+.questions-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.questions-grid{
+    display: grid;
+    width: 95vw;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .5em;
+    padding: 1em;
+    grid-template-rows: 1fr 1fr;
+}
+
+.shape-container{
+    width: 75px;
+}
+
+/* QUESTIONS-------------------------------------- */
+
+
 
 
 /* load animation--------------------------- */
