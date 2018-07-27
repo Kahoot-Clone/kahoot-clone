@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import './Host-New-Question.css';
+import './Host-Question.css'
 import './Host.css';
 
 export default class Edit_Question extends Component {
@@ -60,7 +61,7 @@ export default class Edit_Question extends Component {
         return (                                        
 // Used a bunch of arrow functions here instead of binding at top - Nate
         <div className='mapped-container'>
-        <Link to='/host/questions'>
+        <Link to='/host/questions' className='btn-link'>
         go back
         </Link>
             <div className='new-q'>
