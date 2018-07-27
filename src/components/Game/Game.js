@@ -108,7 +108,7 @@ class Game extends Component {
             }
             let endQuestion = ()=>{
                 clearInterval(timeKept);
-                this.questionOver()
+                this.questionOver();
             }
             return internalTimer > 0 
             ? checkAnswers()
@@ -121,7 +121,7 @@ class Game extends Component {
     nextQuestion() {
         let { pin, questions, currentQuestion } = this.state;
         this.timeKeeper();
-        this.hotTimer();
+        // this.hotTimer();
 
         currentQuestion === questions.length 
             ? this.setState({ gameOver: true })
@@ -192,7 +192,6 @@ class Game extends Component {
                         :
                         isLive && !questionOver && !gameOver ?
                             <GameQuestions
-                                timer={timer}
                                 question={questions[currentQuestion].question}
                                 answer1={questions[currentQuestion].answer1}
                                 answer2={questions[currentQuestion].answer2}
