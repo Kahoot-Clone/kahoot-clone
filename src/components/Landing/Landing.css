@@ -18,10 +18,12 @@
   .player-input-wrapper{
     width: 250px;
   }
+  
   .logo-host{
     position: relative;
     z-index: 1;
   }
+
   .input-user{
     border: .125rem solid #ccc;
     width: 100%;

@@ -52,8 +52,8 @@ export default class Timer extends Component {
   
     render() {
       return(
-        <div>
-         Second Left: {this.state.time.s}
+        <div className='timer'>
+         Seconds Left: {this.state.time.s}
         </div>
       );
     }
