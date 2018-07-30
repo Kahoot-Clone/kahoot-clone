@@ -224,7 +224,38 @@
     width: 75px;
 }
 
+
+.question-over-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.center{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
 /* QUESTIONS-------------------------------------- */
+
+
+
+.timer{
+    font-size: 40px;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    animation-name: timer-color;
+    animation-duration: 20s;
+}
+
+@keyframes timer-color{
+    0% {  color: #202020;}
+    70% {  color: #202020;
+        transform: scale(1)}
+    100% {  color: #d30000;
+            transform: scale(1.1)
+            }
+}
+
+
 
 
 
