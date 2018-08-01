@@ -56,16 +56,6 @@ class Game extends Component {
             alert('You need at least 3 players to start')
         }
     }
-    hotTimer(){
-        this.setState({timer:20});
-        let countDown = ()=>{
-            this.state.timer > 0
-                ? this.setState({timer:this.state.timer-1})
-                : clearInterval(downer)
-        }
-        let downer = setInterval(()=>{countDown()}, 1000);
-        downer;
-    }
     questionOver() {
         let { pin, players } = this.state
         this.socket.emit('question-over', { pin })
