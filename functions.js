@@ -34,7 +34,7 @@ module.exports ={
     players = updatedPlayers.push(player[0])
     return players  
   },
-  handleNicknameInput = (e) => {
+  handleNicknameInput: (e) => {
     let nickname = ''
     nickname = e
     return nickname   
