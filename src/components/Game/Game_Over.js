@@ -1,14 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import './Game.css';
+
 export default function GameOver(props){
-    console.log(props)
     return(
-        <div>
-            <h1>Game Over</h1>
-            <p>1st Place: {props.leaderboard[0].name}</p>
-            <p>2nd Place: {props.leaderboard[1].name}</p>
-            <p>Last Place: {props.leaderboard[props.leaderboard.length()-1].name}</p>
-            <Link to='/host'>Start a new Game?</Link>
+        <div className='game-over'>
+            <h1 className='leaderBoard-title'>Game Over</h1>
+            <br/>
+            <h2 className='leaderBoard'>1st Place: {props.leaderboard[0].name}</h2>
+            <h2 className='leaderBoard'>2nd Place: {props.leaderboard[1].name}</h2>
+            <h2 className='leaderBoard'>Last Place: {props.leaderboard.pop().name}</h2>
+            <br/>
+            <Link to='/host'>
+            <button className='btn-newGame'>
+            Start a new Game?
+            </button>
+            </Link>
         </div> 
     )
 }
