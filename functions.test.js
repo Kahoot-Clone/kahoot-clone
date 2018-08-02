@@ -46,3 +46,20 @@ describe('Adding player Method', () => {
   
 // })
 
+describe('Submit Nickname Method'), () => {
+  test('Should return a truthy value', () => {
+    expect(fn.handleNicknameInput().toBeTruthy())
+  })
+  test('Should be a string value', () => {
+    expect(fn.handleNicknameInput('Ryan').toBe('Ryan'))
+  })
+  test('Should not return NaN', () => {
+    expect(fn.handleNicknameInput().not.toBe(NaN))
+  })
+  test('Should not return undefined', () => {
+    expect(fn.handleNicknameInput().not.toBe(undefined))
+  })
+  test('Should not return Falsy value', () => {
+    expect(fn.handleNicknameInput().not.toBeFalsy())
+  })
+}
