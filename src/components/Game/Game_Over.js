@@ -1,10 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './Game.css';
+import Zoom from '../../components/animations/zoomin.js';
+
 
 export default function GameOver(props){
     return(
         <div className='game-over'>
+                          <Zoom/>
+
             <h1 className='leaderBoard-title'>Game Over</h1>
             <br/>
             <h2 className='leaderBoard'>1st Place: {props.leaderboard[0].name}</h2>
