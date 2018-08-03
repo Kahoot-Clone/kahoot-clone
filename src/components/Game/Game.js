@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import GameQuestions from './Game_Questions';
 import GameQuestionOver from './Game_Question_Over';
-import GameOver from './Game_Over';
 
 class Game extends Component {
     constructor() {
@@ -55,16 +54,6 @@ class Game extends Component {
         } else {
             alert('You need at least 3 players to start')
         }
-    }
-    hotTimer(){
-        this.setState({timer:20});
-        let countDown = ()=>{
-            this.state.timer > 0
-                ? this.setState({timer:this.state.timer-1})
-                : clearInterval(downer)
-        }
-        let downer = setInterval(()=>{countDown()}, 1000);
-        downer;
     }
     questionOver() {
         let { pin, players } = this.state
@@ -174,7 +163,7 @@ class Game extends Component {
 
     render() {
         console.log(this.state)
-        let { pin, questions, currentQuestion, isLive, questionOver, gameOver, timer } = this.state;
+        let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
         let mappedPlayers = this.state.players.map(player => {
             return (
                 <p key={player.id} className='player-name' >{player.name}</p>
@@ -203,10 +192,10 @@ class Game extends Component {
                                 answer4={questions[currentQuestion].answer4}
                                 questionOver={this.questionOver} />
                             :
-                            isLive && questionOver && !gameOver ?
-                                <GameQuestionOver nextQuestion={this.nextQuestion} />
-                                :
-                                <GameOver leaderboard={this.state.leaderBoard} />
+                            <GameQuestionOver 
+                                nextQuestion={this.nextQuestion} 
+                                leaderboard={this.state.leaderBoard} 
+                                lastQuestion={this.state.questions.length === this.state.currentQuestion}  />
                 }
             </div>
         )
